@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tamil Nadu Polling 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="./static/css/style.css">
+</head>
+
+<body class="bg-gray-50 text-white">
+
+
+<!-- Navbar -->
+<nav id="navbar" class="fixed w-full top-0 z-50 bg-[#06038D] transition-colors duration-300">
+  <div class="px-5 sm:px-10 md:px-20 flex justify-between items-center h-16">
+    <a href="index.html" class="text-2xl font-bold text-white">TN Polls 2026</a>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="index.html" class="hover:text-gray-200 transition">Home</a>
+      <a href="information.html" class="hover:text-gray-200 transition">Overview</a>
+      <a href="blogs.html" class="px-4 py-2 border border-white rounded bg-white/10 text-white hover:bg-white/20 transition">Blogs</a>
+      <div class="flex items-center space-x-2">
+  <span id="lang-label" class="text-white font-semibold text-sm">ENG</span>
+  <label class="relative inline-flex items-center cursor-pointer">
+    <input type="checkbox" class="sr-only peer" id="lang-toggle">
+    <!-- Track -->
+    <div class="w-10 h-6 bg-gray-300 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+    <!-- Slider -->
+    <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md peer-checked:translate-x-6 transition-transform"></div>
+  </label>
+</div>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+
+  <!-- Mobile Sidebar Menu -->
+  <div id="mobile-menu" class="fixed top-0 right-[-70%] h-full w-[70%]  bg-[#06038D]/95  text-white shadow-lg transition-all duration-500 z-50 flex flex-col px-6 py-8 space-y-4">
+    <a href="index.html" class="hover:text-red-500 transition">Home</a>
+    <a href="information.html" class="hover:text-red-500 transition">Overview</a>
+    <a href="blogs.html" class="px-4 py-2 border border-white rounded bg-white/10 text-white hover:bg-white/20 transition">Blogs</a>
+   <div class="flex items-center space-x-2 mt-6">
+  <span id="mobile-lang-label" class="text-white font-semibold text-sm">ENG</span>
+  <label class="relative inline-flex items-center cursor-pointer">
+    <input type="checkbox" class="sr-only peer" id="mobile-lang-toggle">
+    <!-- Track -->
+    <div class="w-10 h-6 bg-gray-300 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+    <!-- Slider -->
+    <div class="absolute left-[2px] top-[2px] w-5 h-5 bg-white rounded-full shadow-md peer-checked:translate-x-[18px] transition-transform duration-300"></div>
+  </label>
+</div>
+  </div>
+</nav>
+
+
+
+
+
+ <div class="w-full  mx-auto px-4 sm:px-6 md:px-20  py-8 text-black mt-20">
+
+    <!-- Featured Story -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full py-8">
+  <!-- Main Slider -->
+  <div class="lg:col-span-2 relative rounded-lg overflow-hidden w-full mx-auto">
+    <!-- Progress bars -->
+    <div class="absolute top-4 left-4 right-4 flex gap-1 z-10 cursor-pointer">
+      <div class="h-1 bg-gray-400 rounded-full flex-1 overflow-hidden" data-index="0">
+        <div class="bg-white h-full w-0 transition-all duration-300" id="progress1"></div>
+      </div>
+      <div class="h-1 bg-gray-400 rounded-full flex-1 overflow-hidden" data-index="1">
+        <div class="bg-white h-full w-0 transition-all duration-300" id="progress2"></div>
+      </div>
+      <div class="h-1 bg-gray-400 rounded-full flex-1 overflow-hidden" data-index="2">
+        <div class="bg-white h-full w-0 transition-all duration-300" id="progress3"></div>
+      </div>
+    </div>
+
+    <!-- News slides -->
+    <div class="relative h-80">
+      <div class="absolute inset-0 transition-opacity duration-700 opacity-100 cursor-pointer" id="slide1">
+        <img src="featured1.jpg" alt="News 1" class="w-full h-80 object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 text-white">
+          <span class="bg-red-600 px-3 py-1 rounded text-sm font-semibold">Featured Story</span>
+          <h2 class="text-2xl font-bold mt-3 leading-snug ">News Headline 1</h2>
+          <p class="text-gray-300 text-sm mt-2">Nov 15, 2024 | Political News</p>
+        </div>
+      </div>
+
+      <div class="absolute inset-0 transition-opacity duration-700 opacity-0 cursor-pointer" id="slide2">
+        <img src="featured2.jpg" alt="News 2" class="w-full h-80 object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 text-white">
+          <span class="bg-red-600 px-3 py-1 rounded text-sm font-semibold">Featured Story</span>
+          <h2 class="text-2xl font-bold mt-3 leading-snug">News Headline 2</h2>
+          <p class="text-gray-300 text-sm mt-2">Nov 15, 2024 | Political News</p>
+        </div>
+      </div>
+
+      <div class="absolute inset-0 transition-opacity duration-700 opacity-0 cursor-pointer" id="slide3">
+        <img src="featured3.jpg" alt="News 3" class="w-full h-80 object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 text-white">
+          <span class="bg-red-600 px-3 py-1 rounded text-sm font-semibold">Featured Story</span>
+          <h2 class="text-2xl font-bold mt-3 leading-snug">News Headline 3</h2>
+          <p class="text-gray-300 text-sm mt-2">Nov 15, 2024 | Political News</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Side small cards -->
+  <div class="flex flex-col gap-4">
+    <div class="flex items-center gap-4 bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition cursor-pointer">
+      <img src="side1.jpg" class="w-24 h-24 object-cover" alt="">
+      <div class="p-2">
+        <p class="text-sm text-gray-500">Nov 15, 2024</p>
+        <h4 class="text-base font-semibold">The Top 10 Best Computer Speakers in the Market</h4>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition cursor-pointer">
+      <img src="side2.jpg" class="w-24 h-24 object-cover" alt="">
+      <div class="p-2">
+        <p class="text-sm text-gray-500">Nov 15, 2024</p>
+        <h4 class="text-base font-semibold">Exploring the latest trends in smartphone design</h4>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition cursor-pointer">
+      <img src="side3.jpg" class="w-24 h-24 object-cover" alt="">
+      <div class="p-2">
+        <p class="text-sm text-gray-500">Nov 15, 2024</p>
+        <h4 class="text-base font-semibold">How AI is transforming the creative industry</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const slides = [
+  document.getElementById('slide1'),
+  document.getElementById('slide2'),
+  document.getElementById('slide3')
+];
+const progressBars = [
+  document.getElementById('progress1'),
+  document.getElementById('progress2'),
+  document.getElementById('progress3')
+];
+const progressContainers = document.querySelectorAll('[data-index]');
+
+let current = 0;
+let autoSlideTimer;
+let progressTimer;
+
+function resetProgressBars() {
+  progressBars.forEach(bar => bar.style.width = '0%');
+}
+
+function showSlide(index) {
+  clearInterval(progressTimer);
+  clearTimeout(autoSlideTimer);
+
+  // Show the chosen slide
+  slides.forEach((slide, i) => {
+    slide.style.opacity = i === index ? '1' : '0';
+  });
+
+  resetProgressBars();
+
+  let width = 0;
+  progressTimer = setInterval(() => {
+    width += 1;
+    progressBars[index].style.width = width + '%';
+    if (width >= 100) {
+      clearInterval(progressTimer);
+    }
+  }, 50); // 5 seconds
+
+  autoSlideTimer = setTimeout(() => {
+    current = (index + 1) % slides.length;
+    showSlide(current);
+  }, 5000);
+}
+
+// Allow click to jump directly
+progressContainers.forEach(bar => {
+  bar.addEventListener('click', () => {
+    current = parseInt(bar.dataset.index);
+    showSlide(current);
+  });
+});
+
+// Start auto slider
+showSlide(current);
+</script>
+
+
+    <!-- Top Stories -->
+    <section class="mt-10">
+      <h3 class="text-xl font-bold mb-4 border-l-4 border-red-600 pl-2">Top Stories</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+          <img src="story1.jpg" alt="" class="h-32 w-full object-cover">
+          <div class="p-3">
+            <h4 class="text-sm font-semibold">A Value-Focused Hotel: The Era of Travel Reforms</h4>
+            <p class="text-xs text-gray-500 mt-1">2k Views • 2 Days ago</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+          <img src="story2.jpg" alt="" class="h-32 w-full object-cover">
+          <div class="p-3">
+            <h4 class="text-sm font-semibold">The Only Thing That Overcomes Hard Luck</h4>
+            <p class="text-xs text-gray-500 mt-1">2k Views • 2 Days ago</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+          <img src="story3.jpg" alt="" class="h-32 w-full object-cover">
+          <div class="p-3">
+            <h4 class="text-sm font-semibold">There May Concessions in the New Tax Bill</h4>
+            <p class="text-xs text-gray-500 mt-1">2k Views • 2 Days ago</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+          <img src="story4.jpg" alt="" class="h-32 w-full object-cover">
+          <div class="p-3">
+            <h4 class="text-sm font-semibold">Success Is Not a Good Teacher, Failure Makes You Humble</h4>
+            <p class="text-xs text-gray-500 mt-1">2k Views • 2 Days ago</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+          <img src="story5.jpg" alt="" class="h-32 w-full object-cover">
+          <div class="p-3">
+            <h4 class="text-sm font-semibold">Budget Issues Force the Government to Reassess</h4>
+            <p class="text-xs text-gray-500 mt-1">2k Views • 2 Days ago</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Stories & Upcoming Streaming -->
+    <section class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Latest Stories -->
+      <div class="lg:col-span-2">
+        <h3 class="text-xl font-bold mb-4 border-l-4 border-blue-600 pl-2">Latest Stories</h3>
+
+        <article class="bg-white rounded-lg shadow-sm p-6 mb-6 hover:shadow-md transition cursor-pointer">
+          
+          <h4 class="text-lg font-semibold mb-2">I enjoy hard work! I love setting goals and achieving them.</h4>
+          <p class="text-sm text-gray-500 mb-3">Stay focused and remember we design the best WordPress themes around the world.</p>
+          <p class="text-xs text-gray-400">Nov 15, 2024</p>
+        </article>
+
+        <article class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition cursor-pointer">
+          
+          <h4 class="text-lg font-semibold mb-2">The company behind Vespa built a flying car prototype.</h4>
+          <p class="text-sm text-gray-500 mb-3">Focused on creating the most iconic vehicles ever designed, the company expands its innovation.</p>
+          <p class="text-xs text-gray-400">Nov 15, 2024</p>
+        </article>
+      </div>
+
+      <!-- Upcoming Streaming -->
+      <div>
+        <h3 class="text-xl font-bold mb-4 border-l-4 border-green-600 pl-2">Upcoming Streaming</h3>
+        <div class="flex flex-col gap-4">
+          <div class="flex gap-4 bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition cursor-pointer">
+            <img src="stream1.jpg" alt="" class="w-20 h-20 rounded object-cover">
+            <div>
+              <p class="text-sm text-gray-500">Nov 15, 2024</p>
+              <h4 class="text-base font-semibold">The Top 10 Best Computer Speakers in the Market</h4>
+            </div>
+          </div>
+
+          <div class="flex gap-4 bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition cursor-pointer">
+            <img src="stream2.jpg" alt="" class="w-20 h-20 rounded object-cover">
+            <div>
+              <p class="text-sm text-gray-500">Nov 15, 2024</p>
+              <h4 class="text-base font-semibold">How to get the best from your MacBook Pro speakers</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
+
+<script>
+// Attach click handler to all clickable news elements
+document.querySelectorAll(".cursor-pointer").forEach((item) => {
+  item.addEventListener("click", () => {
+    // Extract data safely from the clicked element
+    const title = item.querySelector("h2, h3, h4")?.innerText || "Untitled";
+    const date =
+      item.querySelector("p.text-gray-400, p.text-gray-500, p.text-gray-300")?.innerText ||
+      "Date unavailable";
+    const image = item.querySelector("img")?.src || "featured1.jpg";
+    const description =
+      item.querySelector("p.text-gray-500, p.text-gray-300")?.innerText ||
+      "No short description available.";
+    const content = `
+      <p class="mb-4">${description}</p>
+      <p>This is the detailed view for <strong>${title}</strong>. 
+      Stay tuned for more in-depth political coverage, analysis, and updates.</p>
+    `;
+
+    // Store in localStorage
+    localStorage.setItem(
+      "selectedNews",
+      JSON.stringify({ title, date, image, description, content })
+    );
+
+    // Redirect to the detail page
+    window.location.href = "blog_detail.html";
+  });
+});
+</script>
+
+
+
+
+     <!-- Footer -->
+  <footer class="bg-black py-12 border-t border-neutral-800">
+    <div class="container mx-auto px-8 flex flex-col md:flex-row justify-between gap-8">
+      
+      <!-- Left -->
+      <div>
+        <p class="font-mono uppercase tracking-wider text-gray-200">TN Polls 2026</p>
+        <p class="mt-4 text-sm text-gray-400 max-w-5xl">Stay informed with the latest updates from the Tamil Nadu Legislative Assembly Elections. 
+        Explore candidate profiles, polling information, and news insights - all in one place.</p>
+      </div>
+
+      <!-- Right -->
+<div class="flex flex-col md:flex-row gap-8 md:gap-16 text-gray-400">
+
+  <!-- Quick Links -->
+  <div>
+    <p class="uppercase text-xs text-gray-500 mb-2">[Quick Links]</p>
+    <ul class="space-y-1">
+      <li><a href="#candidates" class="hover:text-white transition">Candidates </a></li>
+      <li><a href="#parties" class="hover:text-white transition"> Parties</a></li>
+      <li><a href="#news" class="hover:text-white transition"> News</a></li>
+
+
+    </ul>
+  </div>
+
+  <!-- Latest Updates -->
+  <div>
+    <p class="uppercase text-xs text-gray-500 mb-2">[Latest Updates]</p>
+    <ul class="space-y-1">
+      
+      <li><a href="#blogs" class="hover:text-white transition">Insights</a></li>
+      <li><a href="#events" class="hover:text-white transition"> Events</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+
+   <div class="text-center text-xs text-gray-500 mt-12">
+  Make Your Voice Count – Every Vote Shapes Tamil Nadu's Future!
+</div>
+
+  </footer>
+
+
+
+<script src="./static/js/other_scripts.js"></script>
+
+
+
+</body>
+</html>

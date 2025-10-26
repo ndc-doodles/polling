@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tamil Nadu Polling 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="./static/css/style.css">
+</head>
+
+<body class="bg-gray-50 text-white">
+
+
+<!-- Navbar -->
+<nav id="navbar" class="fixed w-full top-0 z-50 bg-[#06038D] transition-colors duration-300 z-[9999]">
+  <div class="px-5 sm:px-10 md:px-20 flex justify-between items-center h-16">
+    <a href="index.html" class="text-2xl font-bold text-white">TN Polls 2026</a>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="index.html" class="hover:text-gray-200 transition">Home</a>
+      <a href="information.html" class="px-4 py-2 border border-white rounded bg-white/10 text-white hover:bg-white/20 transition">Overview</a>
+      <a href="blogs.html" class="hover:text-gray-200 transition">Blogs</a>
+      <div class="flex items-center space-x-2">
+  <span id="lang-label" class="text-white font-semibold text-sm">ENG</span>
+  <label class="relative inline-flex items-center cursor-pointer">
+    <input type="checkbox" class="sr-only peer" id="lang-toggle">
+    <!-- Track -->
+    <div class="w-10 h-6 bg-gray-300 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+    <!-- Slider -->
+    <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md peer-checked:translate-x-6 transition-transform"></div>
+  </label>
+</div>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+
+  <!-- Mobile Sidebar Menu -->
+  <div id="mobile-menu" class="fixed top-0 right-[-70%] h-full w-[70%] bg-[#06038D]/95 text-white shadow-lg transition-all duration-500 z-50 flex flex-col px-6 py-8 space-y-4">
+    <a href="index.html" class="hover:text-red-500 transition">Home</a>
+    <a href="information.html" class="px-4 py-2 border border-white rounded bg-white/10 text-white hover:bg-white/20 transition">Overview</a>
+    <a href="blogs.html" class="hover:text-red-500 transition">Blogs</a>
+   <div class="flex items-center space-x-2 mt-6">
+  <span id="mobile-lang-label" class="text-white font-semibold text-sm">ENG</span>
+  <label class="relative inline-flex items-center cursor-pointer">
+    <input type="checkbox" class="sr-only peer" id="mobile-lang-toggle">
+    <!-- Track -->
+    <div class="w-10 h-6 bg-gray-300 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+    <!-- Slider -->
+    <div class="absolute left-[2px] top-[2px] w-5 h-5 bg-white rounded-full shadow-md peer-checked:translate-x-[18px] transition-transform duration-300"></div>
+  </label>
+</div>
+
+  </div>
+</nav>
+
+
+
+
+<div class="flex flex-col md:flex-row min-h-screen text-black">
+
+<!-- Mobile Menu Button -->
+<div class="md:hidden fixed top-16 left-0 w-full bg-white border-b border-gray-200 p-4 z-9999 flex items-center">
+  <button id="menu-btn" class="text-blue-600 font-semibold">☰ Menu</button>
+  <span class="ml-4 font-bold text-lg hidden md:flex ">Contents</span>
+</div>
+
+
+  <!-- Sidebar -->
+<aside id="sidebar" class="fixed md:relative top-0 left-0 max-md:z-[9999] w-64 bg-white border-r border-gray-200 p-6 min-h-screen overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 pt-20">
+  <h2 class="text-lg font-semibold mb-4">Contents</h2>
+  <nav>
+    <ul class="space-y-2 text-sm">
+      <li><button class="section-btn text-blue-600 hover:underline w-full text-left" data-target="introduction">1. Introduction</button></li>
+      <li><button class="section-btn text-blue-600 hover:underline w-full text-left" data-target="etymology">2. Etymology</button></li>
+      <li><button class="section-btn text-blue-600 hover:underline w-full text-left" data-target="geography">3. Geography</button></li>
+      <li><button class="section-btn text-blue-600 hover:underline w-full text-left" data-target="climate">4. Climate</button></li>
+      <li><button class="section-btn text-blue-600 hover:underline w-full text-left" data-target="history">5. History</button></li>
+      <li><button class="section-btn text-blue-600 hover:underline w-full text-left" data-target="politics">6. Politics</button></li>
+    </ul>
+  </nav>
+</aside>
+
+
+  <!-- Overlay for mobile -->
+  <div id="overlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6 md:p-10 flex flex-col space-y-8 ml-0 max-md:mt-20">
+
+    <!-- Introduction -->
+    <section id="introduction" class="section-card w-full max-w-4xl p-6 md:p-8">
+      <h2 class="text-3xl font-bold mb-3 pt-6">Introduction</h2>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/India_Tamil_Nadu_locator_map.svg" alt="Tamil Nadu Map" class="w-full rounded-lg mb-4">
+      <p class="leading-relaxed mb-4">
+        Tamil Nadu, located at the southern tip of India, is famous for its ancient Dravidian culture, classical arts like Bharatanatyam and Carnatic music, and rich heritage of temples. With Chennai as the capital, it is a hub for education, technology, and industries.
+      </p>
+      <ul class="list-disc list-inside space-y-1 leading-relaxed mb-4">
+        <li>Population: ~75 million</li>
+        <li>Official Language: Tamil</li>
+        <li>Major Cities: Chennai, Coimbatore, Madurai, Tiruchirappalli</li>
+        <li>Famous Temples: Brihadeeswarar Temple, Meenakshi Temple, Rameswaram</li>
+      </ul>
+    </section>
+
+    <!-- Etymology -->
+    <section id="etymology" class="section-card hidden w-full max-w-4xl p-6 md:p-8">
+      <h2 class="text-3xl font-bold mb-3">Etymology</h2>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Tamil_script.svg" alt="Tamil Script" class="w-full rounded-lg mb-4">
+      <p class="leading-relaxed mb-4">
+        The name "Tamil Nadu" translates to "Land of the Tamils." It emphasizes the ethnic and linguistic identity of the Tamil people, one of the oldest living civilizations with a rich literary and cultural tradition.
+      </p>
+      <p class="leading-relaxed mb-4">
+        The word “Tamil” represents the language, literature, and culture, while “Nadu” means country or region. Tamil Nadu as a state was officially formed in 1956 after the States Reorganization Act.
+      </p>
+    </section>
+
+    <!-- Geography -->
+    <section id="geography" class="section-card hidden w-full max-w-4xl p-6 md:p-8">
+      <h2 class="text-3xl font-bold mb-3">Geography</h2>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Tamil_Nadu_Coastline.jpg" alt="Tamil Nadu Coast" class="w-full rounded-lg mb-4">
+      <p class="leading-relaxed mb-4">
+        Tamil Nadu features diverse geographical regions including coastal plains along the Bay of Bengal, fertile river valleys like the Cauvery delta, and hill ranges such as the Western and Eastern Ghats.
+      </p>
+      <ul class="list-disc list-inside space-y-1 mb-4">
+        <li>Rivers: Cauvery, Vaigai, Thamirabarani</li>
+        <li>Hills: Nilgiris, Western Ghats, Eastern Ghats</li>
+        <li>Coastal area: 1,076 km along Bay of Bengal</li>
+      </ul>
+    </section>
+
+    <!-- Climate -->
+    <section id="climate" class="section-card hidden w-full max-w-4xl p-6 md:p-8">
+      <h2 class="text-3xl font-bold mb-3">Climate</h2>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Chennai_Monsoon.jpg" alt="Tamil Nadu Climate" class="w-full rounded-lg mb-4">
+      <p class="leading-relaxed mb-4">
+        Tamil Nadu has a tropical climate, hot and humid along the coasts, and cooler in hill stations. The state receives most rainfall during the northeast monsoon (October–December) and occasional southwest monsoon showers.
+      </p>
+    </section>
+
+    <!-- History -->
+    <section id="history" class="section-card hidden w-full max-w-4xl p-6 md:p-8">
+      <h2 class="text-3xl font-bold mb-3">History</h2>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Brihadeeswara_Temple.JPG" alt="Brihadeeswarar Temple" class="w-full rounded-lg mb-4">
+      <p class="leading-relaxed mb-4">
+        Tamil Nadu has a history spanning over 2,000 years. Ancient Tamil kingdoms like Cholas, Pandyas, and Cheras contributed immensely to art, architecture, and literature.
+      </p>
+    </section>
+
+    <!-- Politics -->
+    <section id="politics" class="section-card hidden w-full max-w-4xl p-6 md:p-8">
+      <h2 class="text-3xl font-bold mb-3">Politics & Major Parties</h2>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/DMK_party_flag.jpg" alt="DMK Party Flag" class="w-full rounded-lg mb-4">
+      <p class="leading-relaxed mb-4">
+        Tamil Nadu’s politics is dominated by Dravidian parties since 1967. Major parties include DMK and AIADMK.
+      </p>
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('.section-btn');
+  const sections = document.querySelectorAll('.section-card');
+  const sidebar = document.getElementById('sidebar');
+  const menuBtn = document.getElementById('menu-btn');
+  const overlay = document.getElementById('overlay');
+
+  // Section toggle
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-target');
+      sections.forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(target).classList.remove('hidden');
+
+      // Hide sidebar on mobile after click
+      if (window.innerWidth < 768) {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    });
+  });
+
+  // Menu button toggle
+  menuBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('-translate-x-full');
+    overlay.classList.toggle('hidden');
+  });
+
+  // Clicking overlay closes sidebar
+  overlay.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');
+    overlay.classList.add('hidden');
+  });
+</script>
+
+
+
+
+
+
+
+<footer class="bg-black py-12 border-t border-neutral-800 z-[9999] mt-auto">
+  <div class="container mx-auto px-8 flex flex-col md:flex-row justify-between gap-8">
+    
+    <!-- Left -->
+    <div>
+      <p class="font-mono uppercase tracking-wider text-gray-200">TN Polls 2026</p>
+      <p class="mt-4 text-sm text-gray-400 max-w-5xl">
+        Stay informed with the latest updates from the Tamil Nadu Legislative Assembly Elections. 
+        Explore candidate profiles, polling information, and news insights - all in one place.
+      </p>
+    </div>
+
+    <!-- Right -->
+    <div class="flex flex-col md:flex-row gap-8 md:gap-16 text-gray-400">
+      <!-- Quick Links -->
+      <div>
+        <p class="uppercase text-xs text-gray-500 mb-2">[Quick Links]</p>
+        <ul class="space-y-1">
+          <li><a href="#candidates" class="hover:text-white transition">Candidates</a></li>
+          <li><a href="#parties" class="hover:text-white transition">Parties</a></li>
+          <li><a href="#news" class="hover:text-white transition">News</a></li>
+        </ul>
+      </div>
+
+      <!-- Latest Updates -->
+      <div>
+        <p class="uppercase text-xs text-gray-500 mb-2">[Latest Updates]</p>
+        <ul class="space-y-1">
+          <li><a href="#blogs" class="hover:text-white transition">Insights</a></li>
+          <li><a href="#events" class="hover:text-white transition">Events</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center text-xs text-gray-500 mt-12">
+    Make Your Voice Count – Every Vote Shapes Tamil Nadu's Future!
+  </div>
+</footer>
+
+
+
+<script src="./static/js/other_scripts.js"></script>
+
+
+
+</body>
+</html>

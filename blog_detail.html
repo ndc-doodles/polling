@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tamil Nadu Polling 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="./static/css/style.css">
+</head>
+
+<body class="bg-gray-50 text-white">
+
+
+
+<!-- Navbar -->
+<nav id="navbar" class="fixed w-full top-0 z-50 bg-[#06038D] transition-colors duration-300">
+  <div class="px-5 sm:px-10 md:px-20 flex justify-between items-center h-16">
+    <a href="index.html" class="text-2xl font-bold text-white">TN Polls 2026</a>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="index.html" class="hover:text-gray-200 transition">Home</a>
+      <a href="information.html" class="hover:text-gray-200 transition">Overview</a>
+      <a href="blogs.html" class="px-4 py-2 border border-white rounded bg-white/10 text-white hover:bg-white/20 transition">Blogs</a>
+      <div class="flex items-center space-x-2">
+  <span id="lang-label" class="text-white font-semibold text-sm">ENG</span>
+  <label class="relative inline-flex items-center cursor-pointer">
+    <input type="checkbox" class="sr-only peer" id="lang-toggle">
+    <!-- Track -->
+    <div class="w-10 h-6 bg-gray-300 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+    <!-- Slider -->
+    <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md peer-checked:translate-x-6 transition-transform"></div>
+  </label>
+</div>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+
+  <!-- Mobile Sidebar Menu -->
+  <div id="mobile-menu" class="fixed top-0 right-[-70%] h-full w-[70%]  bg-[#06038D]/95  text-white shadow-lg transition-all duration-500 z-50 flex flex-col px-6 py-8 space-y-4">
+    <a href="index.html" class="hover:text-red-500 transition">Home</a>
+    <a href="information.html" class="hover:text-red-500 transition">Overview</a>
+    <a href="blogs.html" class="px-4 py-2 border border-white rounded bg-white/10 text-white hover:bg-white/20 transition">Blogs</a>
+   <div class="flex items-center space-x-2 mt-6">
+  <span id="mobile-lang-label" class="text-white font-semibold text-sm">ENG</span>
+  <label class="relative inline-flex items-center cursor-pointer">
+    <input type="checkbox" class="sr-only peer" id="mobile-lang-toggle">
+    <!-- Track -->
+    <div class="w-10 h-6 bg-gray-300 rounded-full peer-checked:bg-blue-500 transition-colors"></div>
+    <!-- Slider -->
+    <div class="absolute left-[2px] top-[2px] w-5 h-5 bg-white rounded-full shadow-md peer-checked:translate-x-[18px] transition-transform duration-300"></div>
+  </label>
+</div>
+  </div>
+</nav>
+
+ 
+   <!-- News Detail Section -->
+  <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col lg:flex-row gap-10 mt-20">
+
+    <!-- Main Content -->
+    <main id="news-main" class="lg:w-2/3 bg-white rounded-xl shadow p-8">
+      <!-- Dynamic content will be injected here -->
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="lg:w-1/3 flex flex-col space-y-6">
+      <!-- Share Section -->
+      <div class="bg-white rounded-xl shadow p-6 text-center">
+  <p class="text-lg font-semibold text-blue-600">
+    Your vote is your voice—make it count!
+  </p>
+</div>
+
+
+      <!-- Related Articles -->
+      <div class="bg-white rounded-xl shadow p-6">
+        <h4 class="text-lg font-semibold mb-4">Related Articles</h4>
+        <ul class="space-y-3 text-blue-600 text-sm">
+          <li><a href="#" class="hover:underline">ASEAN Leaders Discuss Renewable Energy Policies</a></li>
+          <li><a href="#" class="hover:underline">Jakarta to Implement Green Transport System Ahead of ASEAN Summit</a></li>
+          <li><a href="#" class="hover:underline">Indonesia’s Climate Commitment: What’s Next After the Summit?</a></li>
+          <li><a href="#" class="hover:underline">Southeast Asia Faces Growing Threat from Rising Sea Levels</a></li>
+          <li><a href="#" class="hover:underline">Local Startups Join Government’s Green Innovation Program</a></li>
+          <li><a href="#" class="hover:underline">ASEAN Youth Summit: Climate Activists Demand Stronger Action</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    const news = JSON.parse(localStorage.getItem("selectedNews"));
+    const container = document.getElementById("news-main");
+
+    if (news) {
+      container.innerHTML = `
+        <h1 class="text-3xl font-bold mb-2">${news.title}</h1>
+        <div class="flex items-center text-gray-500 text-sm mb-6 space-x-2">
+          <span>${news.author || 'TN Polls'}</span>
+          <span>•</span>
+          <span>${news.category || 'News'}</span>
+          <span>•</span>
+          <span>${news.date}</span>
+        </div>
+        <img src="${news.image}" alt="${news.title}" class="rounded-lg mb-6 w-full" />
+        <h2 class="text-xl font-semibold mb-2">${news.subtitle || ''}</h2>
+        <p class="mb-4 leading-relaxed">${news.description}</p>
+        <div class="text-gray-800 leading-relaxed">${news.content}</div>
+      `;
+    } else {
+      container.innerHTML = `
+        <div class="p-10 text-center text-gray-600">
+          <p>No news selected. Please go back to the <a href="blog.html" class="text-blue-500 underline">news page</a>.</p>
+        </div>
+      `;
+    }
+  </script>
+
+
+
+
+     <!-- Footer -->
+  <footer class="bg-black py-12 border-t border-neutral-800">
+    <div class="container mx-auto px-8 flex flex-col md:flex-row justify-between gap-8">
+      
+      <!-- Left -->
+      <div>
+        <p class="font-mono uppercase tracking-wider text-gray-200">TN Polls 2026</p>
+        <p class="mt-4 text-sm text-gray-400 max-w-5xl">Stay informed with the latest updates from the Tamil Nadu Legislative Assembly Elections. 
+        Explore candidate profiles, polling information, and news insights - all in one place.</p>
+      </div>
+
+      <!-- Right -->
+<div class="flex flex-col md:flex-row gap-8 md:gap-16 text-gray-400">
+
+  <!-- Quick Links -->
+  <div>
+    <p class="uppercase text-xs text-gray-500 mb-2">[Quick Links]</p>
+    <ul class="space-y-1">
+      <li><a href="#candidates" class="hover:text-white transition">Candidates </a></li>
+      <li><a href="#parties" class="hover:text-white transition"> Parties</a></li>
+      <li><a href="#news" class="hover:text-white transition"> News</a></li>
+
+
+    </ul>
+  </div>
+
+  <!-- Latest Updates -->
+  <div>
+    <p class="uppercase text-xs text-gray-500 mb-2">[Latest Updates]</p>
+    <ul class="space-y-1">
+      
+      <li><a href="#blogs" class="hover:text-white transition">Insights</a></li>
+      <li><a href="#events" class="hover:text-white transition"> Events</a></li>
+    </ul>
+  </div>
+</div>
+
+    </div>
+
+   <div class="text-center text-xs text-gray-500 mt-12">
+  Make Your Voice Count – Every Vote Shapes Tamil Nadu's Future!
+</div>
+
+  </footer>
+
+
+
+<script src="./static/js/other_scripts.js"></script>
+
+
+
+
+
+
+</body>
+</html>
