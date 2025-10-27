@@ -4,7 +4,7 @@ const mobileMenu = document.getElementById('mobile-menu');
 const overlay = document.getElementById('overlay');
 let menuOpen = false;
 
-// Scroll background effect for both desktop & mobile
+// Navbar scroll effect
 function handleScroll() {
   if (window.scrollY > 50) {
     navbar.classList.add('bg-[#06038D]/80');
@@ -24,16 +24,13 @@ mobileBtn.addEventListener('click', (e) => {
   overlay.classList.toggle('hidden', !menuOpen);
 });
 
-// Close on outside click
 document.addEventListener('click', (e) => {
   if (menuOpen && !mobileMenu.contains(e.target) && !mobileBtn.contains(e.target)) {
     closeMenu();
   }
 });
 
-// Close on overlay click
 overlay.addEventListener('click', closeMenu);
-
 function closeMenu() {
   menuOpen = false;
   mobileMenu.style.right = '-70%';
@@ -46,25 +43,25 @@ const langLabel = document.getElementById('lang-label');
 const mobileLangToggle = document.getElementById('mobile-lang-toggle');
 const mobileLangLabel = document.getElementById('mobile-lang-label');
 
-// Sync toggle state + label
-function updateLanguageUI(isTamil) {
-  langLabel.textContent = isTamil ? 'TAMIL' : 'ENG';
-  mobileLangLabel.textContent = isTamil ? 'TAMIL' : 'ENG';
-  langToggle.checked = isTamil;
-  mobileLangToggle.checked = isTamil;
+function updateLanguageUI(isEnglish) {
+  langLabel.textContent = isEnglish ? 'ENG' : 'TAMIL';
+  mobileLangLabel.textContent = isEnglish ? 'ENG' : 'TAMIL';
+  langToggle.checked = isEnglish;
+  mobileLangToggle.checked = isEnglish;
 }
 
-// Desktop toggle event
+// Desktop toggle
 langToggle.addEventListener('change', () => {
   updateLanguageUI(langToggle.checked);
 });
 
-// Mobile toggle event
+// Mobile toggle
 mobileLangToggle.addEventListener('change', () => {
   updateLanguageUI(mobileLangToggle.checked);
 });
 
-
+// Default: Tamil
+updateLanguageUI(false);
 
 
 const slides = document.querySelectorAll('.slide');

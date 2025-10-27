@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const overlay = document.getElementById('overlay');
   let menuOpen = false;
 
-  // Handle mobile sidebar toggle
+  // === Mobile Sidebar Toggle ===
   mobileBtn.addEventListener('click', () => {
     menuOpen = !menuOpen;
     mobileMenu.style.right = menuOpen ? '0' : '-70%';
@@ -17,21 +17,29 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.classList.add('hidden');
   });
 
-  // Language switch elements
+  // === Language Toggles (Desktop & Mobile) ===
   const langToggle = document.getElementById('lang-toggle');
   const langLabel = document.getElementById('lang-label');
   const mobileLangToggle = document.getElementById('mobile-lang-toggle');
   const mobileLangLabel = document.getElementById('mobile-lang-label');
 
-  // Update both toggles & labels
-  function updateLanguage(isTamil) {
-    langLabel.textContent = isTamil ? 'TAMIL' : 'ENG';
-    mobileLangLabel.textContent = isTamil ? 'TAMIL' : 'ENG';
-    langToggle.checked = isTamil;
-    mobileLangToggle.checked = isTamil;
+  // Sync UI updates
+  function updateLanguage(isEnglish) {
+    langLabel.textContent = isEnglish ? 'ENG' : 'TAMIL';
+    mobileLangLabel.textContent = isEnglish ? 'ENG' : 'TAMIL';
+    langToggle.checked = isEnglish;
+    mobileLangToggle.checked = isEnglish;
   }
 
-  // Listen for both toggles
-  langToggle.addEventListener('change', () => updateLanguage(langToggle.checked));
-  mobileLangToggle.addEventListener('change', () => updateLanguage(mobileLangToggle.checked));
+  // === Event Listeners ===
+  langToggle.addEventListener('change', () => {
+    updateLanguage(langToggle.checked);
+  });
+
+  mobileLangToggle.addEventListener('change', () => {
+    updateLanguage(mobileLangToggle.checked);
+  });
+
+  // === Default Language: Tamil (gray switch) ===
+  updateLanguage(false);
 });
