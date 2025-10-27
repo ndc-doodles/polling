@@ -211,7 +211,11 @@
   <!-- Candidates Grid -->
 <div id="candidatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 auto-rows-[400px]">
   <!-- Candidate Card Example -->
-  <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white" data-name="Edappadi K. Palaniswami" data-party="AIADMK" data-logo="./static/images/aiadmk.png">
+<div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white"
+     data-name="Edappadi K. Palaniswami"
+     data-party="AIADMK"
+     data-logo="./static/images/aiadmk.png"
+     data-constituency="Edappadi">
     <img src="./static/images/palaniswami.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
     <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
@@ -223,7 +227,11 @@
     </div>
   </div>
 
-  <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white" data-name="K. Maragatham" data-party="AIADMK" data-logo="./static/images/aiadmk.png">
+<div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white"
+     data-name="K. Maragatham"
+     data-party="AIADMK"
+     data-logo="./static/images/aiadmk.png"
+     data-constituency="Madurantakam">
     <img src="./static/images/Maragatham .jpg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
     <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
@@ -235,7 +243,11 @@
     </div>
   </div>
 
-  <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white" data-name="Annamalai K" data-party="BJP" data-logo="./static/images/bjp.png">
+<div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white"
+     data-name="Annamalai K"
+     data-party="BJP"
+     data-logo="./static/images/bjp.png"
+     data-constituency="Coimbatore">
     <img src="./static/images/annamalai.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
     <img src="./static/images/bjp.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
@@ -329,15 +341,27 @@ confirmVote.addEventListener('click', () => {
   const filter = document.getElementById('constituencyFilter');
   const cards = document.querySelectorAll('#candidatesGrid > div');
 
-  filter.addEventListener('change', () => {
-    const value = filter.value;
+  function filterCandidates(value) {
+    const lowerValue = value.toLowerCase();
     cards.forEach(card => {
-      if(value === 'all' || card.dataset.constituency === value) {
+      const constituency = card.dataset.constituency.toLowerCase();
+      if (lowerValue === 'all' || constituency === lowerValue) {
         card.classList.remove('hidden');
       } else {
         card.classList.add('hidden');
       }
     });
+  }
+
+  // Filter on dropdown change
+  filter.addEventListener('change', () => {
+    filterCandidates(filter.value);
+  });
+
+  // ✅ Reset filter on page load/refresh
+  window.addEventListener('load', () => {
+    filter.value = 'all';
+    filterCandidates('all');
   });
 </script>
 
@@ -345,8 +369,10 @@ confirmVote.addEventListener('click', () => {
 
 
 
+
+
 <!-- Indian Flag Themed Info Navigation Section -->
-<section class="bg-gradient-to-r from-[#06038D] to-[red] text-black py-12 text-center text-white rounded-2xl mx-4 md:mx-20 mt-12 shadow-xl border border-black/20">
+<section class="bg-gradient-to-r from-[#06038D] to-[red]  py-12 text-center text-white rounded-2xl mx-4 md:mx-20 mt-12 shadow-xl border border-black/20">
   <h1 class="text-2xl md:text-3xl font-bold mb-4 drop-shadow-md">
     Want to Know More?
   </h1>
