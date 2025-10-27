@@ -12,13 +12,10 @@
 
 <body class="bg-gray-50 text-white">
 
- <!-- Navbar -->
 <nav id="navbar" class="fixed w-full top-0 z-50 bg-transparent backdrop-blur-md border-b border-white/30 transition-colors duration-300">
   <div class="px-6 md:px-20 flex justify-between items-center h-16">
-    <!-- Logo -->
     <a href="index.html" class="text-2xl font-bold text-white">TN Polls 2026</a>
 
-    <!-- Desktop Menu -->
     <div class="hidden md:flex items-center space-x-6">
       <a href="index.html" class="px-4 py-2 border border-white rounded bg-white/10 text-white hover:bg-white/20 transition">
         Home
@@ -26,7 +23,6 @@
       <a href="information.html" class="text-white hover:text-gray-200 transition">Overview</a>
       <a href="blogs.html" class="text-white hover:text-gray-200 transition">Blogs</a>
 
-      <!-- Desktop Language Toggle -->
       <div class="flex items-center space-x-2">
         <span id="lang-label" class="text-white font-semibold text-sm">TAMIL</span>
         <label class="relative inline-flex items-center cursor-pointer">
@@ -37,7 +33,6 @@
       </div>
     </div>
 
-    <!-- Mobile Menu Button -->
     <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -46,16 +41,13 @@
     </button>
   </div>
 
-  <!-- Overlay -->
   <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-50"></div>
 
-  <!-- Mobile Sidebar Menu -->
   <div id="mobile-menu" class="fixed top-0 right-[-70%] h-screen w-[70%] bg-[#06038D]/95 text-white shadow-lg transition-all duration-500 z-[9999] flex flex-col px-6 py-8 space-y-4">
     <a href="index.html" class="px-4 py-2 border border-white rounded bg-white/10 text-white hover:bg-white/20 transition">Home</a>
     <a href="information.html" class="hover:text-red-500 transition">Overview</a>
     <a href="blogs.html" class="hover:text-red-500 transition">Blogs</a>
 
-    <!-- Mobile Language Toggle -->
     <div class="flex items-center space-x-2 mt-6">
       <span id="mobile-lang-label" class="text-white font-semibold text-sm">TAMIL</span>
       <label class="relative inline-flex items-center cursor-pointer">
@@ -68,14 +60,14 @@
 </nav>
 
 
-<!-- Carousel -->
+
 <section id="carousel" class="relative w-full h-screen overflow-hidden">
-  <!-- Slide 1 -->
+
   <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 slide">
     <img src="./static/images/india.png" class="w-full h-full object-cover" alt="Tamil Nadu Map">
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="absolute bottom-[50%] md:bottom-[20%] left-[5%] z-20 space-y-8">
-      <h1 class="text-5xl md:text-[5rem] font-bold space-y-2 md:space-y-12 uppercase">
+      <h1 class="text-5xl md:text-[4rem]  font-bold space-y-2 md:space-y-12 uppercase">
         <span class="block text-white">Empower Democracy</span>
         <span class="block outlined-text">Vote Now!</span>
       </h1>
@@ -83,15 +75,13 @@
     </div>
   </div>
 
-  <!-- Slide 2 -->
+ 
   <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 slide">
 
-  <!-- Desktop / Tablet Image -->
   <img src="./static/images/img0.jpg" 
        class="hidden md:block w-full h-full object-cover" 
        alt="Chennai">
 
-  <!-- Mobile Image -->
   <img src="./static/images/mobile_img0.jpg" 
        class="block md:hidden w-full h-full object-cover" 
        alt="Chennai Mobile">
@@ -99,7 +89,7 @@
   <div class="absolute inset-0 bg-black/40"></div>
 
   <div class="absolute bottom-[50%] md:bottom-[20%] left-[5%] z-20 space-y-8">
-    <h1 class="text-5xl md:text-[5rem] font-bold space-y-2 md:space-y-12 uppercase">
+    <h1 class="text-5xl md:text-[4rem] font-bold space-y-2 md:space-y-12 uppercase">
       <span class="block text-white">Your Vote Matters</span>
       <span class="block outlined-text">Be Heard!</span>
     </h1>
@@ -111,12 +101,11 @@
 </div>
 
 
-  <!-- Slide 3 -->
   <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 slide">
     <img src="./static/images/india2.png" class="w-full h-full object-cover" alt="Madurai">
     <div class="absolute inset-0 bg-black/40"></div>
   <div class="absolute bottom-[50%] md:bottom-[20%]  left-[5%] z-20 space-y-8">
-      <h1 class="text-5xl md:text-[5rem] font-bold space-y-2 md:space-y-12 uppercase">
+      <h1 class="text-5xl md:text-[4rem] font-bold space-y-2 md:space-y-12 uppercase">
  <span class="block text-white">Meet Candidates</span>
 <span class="block outlined-text">Vote Wise</span>
 
@@ -126,8 +115,7 @@
     </div>
   </div>
 
-  <!-- Slide Boxes -->
-  <!-- Slide Box 1 (Saffron) -->
+
   <div class="absolute right-0 top-[50%] md:top-1/4 w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 bg-white/70 backdrop-blur-md border-l-4 border-[#FF671F] rounded-2xl flex flex-col justify-center p-6 space-y-4 slide-box md:mr-10" data-slide="0">
     <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">Vote for Your Candidate</h1>
     <p class="text-xs sm:text-sm md:text-sm text-gray-800 max-w-sm">
@@ -139,7 +127,7 @@
     </a>
   </div>
 
-  <!-- Slide Box 2 (Ashoka Chakra Blue) -->
+
   <div class="absolute right-0 top-[50%] md:top-1/4 w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 bg-white/70 backdrop-blur-md border-l-4 border-[#06038D] rounded-2xl flex flex-col justify-center p-6 space-y-4 slide-box hidden md:mr-10" data-slide="1">
     <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">Participate in Democracy</h1>
     <p class="text-xs sm:text-sm md:text-sm text-gray-800 max-w-sm">
@@ -150,7 +138,7 @@
     </a>
   </div>
 
-  <!-- Slide Box 3 (Green) -->
+
   <div class="absolute right-0 top-[50%] md:top-1/4 w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 bg-white/70 backdrop-blur-md border-l-4 border-[#046A38] rounded-2xl flex flex-col justify-center p-6 space-y-4 slide-box hidden md:mr-10" data-slide="2">
     <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">Latest Political Updates</h1>
     <p class="text-xs sm:text-sm md:text-sm text-gray-800 max-w-sm">
@@ -161,16 +149,16 @@
     </a>
   </div>
 
-  <!-- Carousel Navigation Arrows (Right Bottom) -->
+
   <div class="absolute bottom-6 right-6 flex gap-3 z-30">
-    <!-- Left Arrow -->
+    
     <button id="prev-slide" class="w-12 h-12 flex items-center justify-center bg-white/30 border border-white rounded-lg hover:bg-white/50 transition">
       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
 
-    <!-- Right Arrow -->
+
     <button id="next-slide" class="w-12 h-12 flex items-center justify-center bg-white/30 border border-white rounded-lg hover:bg-white/50 transition">
       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -187,206 +175,507 @@
 
 </div>
 
-
-
-
 <section class="my-20 px-4 max-w-7xl mx-auto">
-  <!-- Top Row: Text Left + Filter Right -->
-  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-0">
-    
-    <!-- Left: Text -->
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
     <div class="md:w-2/3">
-      <p class="text-xl md:text-xl text-[#06038D] font-semibold uppercase mb-2">Your Voice Matters</p>
+      <p class="text-xl text-[#06038D] font-semibold uppercase mb-2">Your Voice Matters</p>
       <h1 class="text-4xl md:text-5xl font-bold uppercase text-black tracking-wide mb-4">
         Meet the Candidates
       </h1>
-      <p class="text-gray-800 text-lg md:text-md leading-relaxed">
-        Explore the candidates contesting the Tamil Nadu Legislative Assembly Election 2026.  
-        <span class=" text-[#046A38]">Check your constituency, learn about their vision and vote here!</span>
+      <p class="text-gray-800 text-lg leading-relaxed">
+        Explore the candidates contesting the Tamil Nadu Legislative Assembly Election 2026.
+        <span class="text-[#046A38]">Check your district and constituency, learn about their vision, and vote here!</span>
       </p>
     </div>
+  </div>
 
-   <!-- Right: Blue Themed Filter -->
-<div class="md:w-1/3 flex justify-start md:justify-end">
-  <div class="relative w-full md:w-auto">
-    <!-- Dropdown -->
-    <select id="constituencyFilter"
-      class="appearance-none border-2 border-blue-700 bg-blue-100 text-blue-900 font-semibold px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-blue-400 cursor-pointer pr-12 w-full md:w-auto">
-      <option value="all">All Constituencies</option>
-      <option value="Edappadi">Edappadi</option>
-      <option value="Madurantakam">Madurantakam</option>
+ <!-- Filters -->
+<div
+  class="relative flex flex-wrap md:flex-nowrap items-center justify-between gap-4 mt-10 border-t border-blue-200 pt-6"
+>
+  <div class="flex items-center gap-2 md:gap-3 w-full md:w-auto">
+    <div
+      class="h-[3px] w-10 md:w-16 bg-[#06038D] rounded-full animate-pulse"
+    ></div>
+    <p
+      class="text-[#06038D] font-semibold text-xs md:text-sm whitespace-nowrap"
+    >
+      Filter by <span class="text-green-700">District</span>,
+      <span class="text-orange-600">Constituency</span> or search by
+      <span class="text-[#06038D]">Candidate</span> /
+      <span class="text-[#FF671F]">Party</span>.
+    </p>
+  </div>
+
+  <div
+    class="flex flex-wrap md:flex-nowrap justify-end items-center gap-3 w-full"
+  >
+    <!-- District -->
+    <select
+      id="districtFilter"
+      class="border-2 border-blue-700 bg-blue-100 text-blue-900 font-semibold px-4 py-2 rounded-full w-full md:w-[180px] text-sm"
+    >
+      <option value="all">District</option>
+      <option value="Ariyalur">Ariyalur</option>
+      <option value="Chengalpattu">Chengalpattu</option>
+      <option value="Chennai">Chennai</option>
       <option value="Coimbatore">Coimbatore</option>
-      <option value="New Delhi">New Delhi</option>
+      <option value="Cuddalore">Cuddalore</option>
+      <option value="Dharmapuri">Dharmapuri</option>
+      <option value="Dindigul">Dindigul</option>
+      <option value="Erode">Erode</option>
+      <option value="Kallakurichi">Kallakurichi</option>
+      <option value="Kanchipuram">Kanchipuram</option>
+      <option value="Kanyakumari">Kanyakumari</option>
+      <option value="Karur">Karur</option>
+      <option value="Krishnagiri">Krishnagiri</option>
+      <option value="Madurai">Madurai</option>
+      <option value="Mayiladuthurai">Mayiladuthurai</option>
+      <option value="Nagapattinam">Nagapattinam</option>
+      <option value="Namakkal">Namakkal</option>
+      <option value="Perambalur">Perambalur</option>
+      <option value="Pudukkottai">Pudukkottai</option>
+      <option value="Ramanathapuram">Ramanathapuram</option>
+      <option value="Ranipet">Ranipet</option>
+      <option value="Salem">Salem</option>
+      <option value="Sivaganga">Sivaganga</option>
+      <option value="Tenkasi">Tenkasi</option>
+      <option value="Thanjavur">Thanjavur</option>
+      <option value="Theni">Theni</option>
+      <option value="Thoothukudi">Thoothukudi</option>
+      <option value="Tiruchirappalli">Tiruchirappalli</option>
+      <option value="Tirunelveli">Tirunelveli</option>
+      <option value="Tirupathur">Tirupathur</option>
+      <option value="Tiruppur">Tiruppur</option>
+      <option value="Tiruvallur">Tiruvallur</option>
+      <option value="Tiruvannamalai">Tiruvannamalai</option>
+      <option value="Tiruvarur">Tiruvarur</option>
+      <option value="Vellore">Vellore</option>
+      <option value="Viluppuram">Viluppuram</option>
+      <option value="Virudhunagar">Virudhunagar</option>
     </select>
 
-    <!-- SVG Arrow -->
-    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
-        <path fill="none" stroke="#06038D" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 10l5 5l5-5"/>
-      </svg>
-    </div>
+    <!-- Constituency -->
+    <select
+      id="constituencyFilter"
+      class="border-2 border-green-700 bg-green-100 text-green-900 font-semibold px-4 py-2 rounded-full w-full md:w-[180px] text-sm"
+    >
+      <option value="all">Constituency</option>
+    </select>
+
+    <!-- Search -->
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search..."
+      class="border-2 border-[#06038D] bg-white px-4 py-2 rounded-full text-gray-800 focus:ring-4 focus:ring-blue-400 focus:outline-none w-full md:w-[200px] text-sm"
+    />
   </div>
 </div>
 
 
-  </div>
-
-  <!-- Candidates Grid -->
-<div id="candidatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 auto-rows-[400px]">
-  <!-- Candidate Card Example -->
-<div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white"
-     data-name="Edappadi K. Palaniswami"
-     data-party="AIADMK"
-     data-logo="./static/images/aiadmk.png"
-     data-constituency="Edappadi">
-    <img src="./static/images/palaniswami.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
-    <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-    <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20  object-contain p-1">
-    <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-      <h1 class="text-xl md:text-2xl font-bold">Edappadi K. Palaniswami</h1>
-      <p class="text-sm mt-1">Constituency: Edappadi</p>
-      <p class="text-sm">Party: AIADMK</p>
-      <button class="vote-btn mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
+  <!-- Candidate Grid -->
+  <div id="candidatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+    <!-- EPS -->
+    <div class="relative group rounded-2xl overflow-hidden shadow-xl bg-white hover:shadow-2xl transition"
+      data-name="Edappadi K. Palaniswami" data-party="AIADMK" data-district="Salem" data-constituency="Edappadi">
+      <div class="absolute top-3 right-3 z-20">
+        <img src="./static/images/aiadmk.png" class="w-16 h-16 object-cover rounded-full">
+      </div>
+      <img src="./static/images/palaniswami.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+        <h1 class="text-2xl font-bold">Edappadi K. Palaniswami</h1>
+        <p class="text-sm">District: Salem</p>
+        <p class="text-sm">Constituency: Edappadi</p>
+        <p class="text-sm">Party: AIADMK</p>
+        <button class="mt-3 bg-green-700 hover:bg-green-500 px-7 py-2 rounded-full font-semibold transition">Vote</button>
+      </div>
     </div>
-  </div>
 
-<div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white"
-     data-name="K. Annamalai"
-     data-party="AIADMK"
-     data-logo="./static/images/bjp.png"
-     data-constituency="Madurantakam">
-    <img src="./static/images/annamalai.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
-    <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-    <img src="./static/images/bjp.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20  object-contain p-1">
-    <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-      <h1 class="text-xl md:text-2xl font-bold">K. Annamalai</h1>
-      <p class="text-sm mt-1">Constituency: Coimbatore</p>
-      <p class="text-sm">Party: BJP</p>
-      <button class="vote-btn mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
+    <!-- Annamalai -->
+    <div class="relative group rounded-2xl overflow-hidden shadow-xl bg-white hover:shadow-2xl transition"
+      data-name="K. Annamalai" data-party="BJP" data-district="Coimbatore" data-constituency="Coimbatore South">
+      <div class="absolute top-3 right-3 z-20">
+        <img src="./static/images/bjp.png" class="w-16 h-16 object-cover rounded-full">
+      </div>
+      <img src="./static/images/annamalai.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+        <h1 class="text-2xl font-bold">K. Annamalai</h1>
+        <p class="text-sm">District: Coimbatore</p>
+        <p class="text-sm">Constituency: Coimbatore South</p>
+        <p class="text-sm">Party: BJP</p>
+        <button class="mt-3 bg-green-700 hover:bg-green-500 px-7 py-2 rounded-full font-semibold transition">Vote</button>
+      </div>
     </div>
-  </div>
 
-<div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white"
-     data-name="Vijay"
-     data-party="BJP"
-     data-logo="./static/images/tvk.png"
-     data-constituency="Coimbatore">
-    <img src="./static/images/vijay.png" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
-    <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-    <img src="./static/images/tvk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20  object-contain p-1">
-    <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-      <h1 class="text-xl md:text-2xl font-bold">Vijay</h1>
-      <p class="text-sm mt-1">Constituency: Coimbatore</p>
-      <p class="text-sm">Party: TVK</p>
-      <button class="vote-btn mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
+    <!-- Vijay -->
+    <div class="relative group rounded-2xl overflow-hidden shadow-xl bg-white hover:shadow-2xl transition"
+      data-name="Vijay" data-party="TVK" data-district="Chennai" data-constituency="Saidapet">
+      <div class="absolute top-3 right-3 z-20">
+        <img src="./static/images/tvk.png" class="w-16 h-16 object-cover rounded-full">
+      </div>
+      <img src="./static/images/vijay.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+        <h1 class="text-2xl font-bold">Vijay</h1>
+        <p class="text-sm">District: Chennai</p>
+        <p class="text-sm">Constituency: Saidapet</p>
+        <p class="text-sm">Party: TVK</p>
+        <button class="mt-3 bg-green-700 hover:bg-green-500 px-7 py-2 rounded-full font-semibold transition">Vote</button>
+      </div>
     </div>
+
+    <div class="relative group rounded-2xl overflow-hidden shadow-xl bg-white hover:shadow-2xl transition"
+     data-name="M. K. Stalin" data-party="DMK" data-district="Chennai" data-constituency="Kolathur">
+  <div class="absolute top-3 right-3 z-20">
+    <img src="./static/images/dmk.png" class="w-16 h-16 object-cover rounded-full" alt="DMK symbol">
+  </div>
+  <img src="./static/images/stalin.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="M. K. Stalin">
+  <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+  <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+    <h1 class="text-2xl font-bold">M. K. Stalin</h1>
+    <p class="text-sm">District: Chennai</p>
+    <p class="text-sm">Constituency: Kolathur</p>
+    <p class="text-sm">Party: DMK</p>
+    <button class="mt-3 bg-green-700 hover:bg-green-500 px-7 py-2 rounded-full font-semibold transition">Vote</button>
   </div>
 </div>
 
-<!-- Vote Popup -->
-<div id="votePopup" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-  <div class="bg-white rounded-xl shadow-2xl p-6 w-[90%] max-w-sm text-center relative">
-    <img id="partyLogo" src="" alt="Party Logo" class="w-20 h-20 mx-auto mb-4 rounded-full shadow-md object-contain">
-    <h2 id="candidateName" class="text-2xl font-bold text-gray-800 mb-2"></h2>
-    <p id="partyName" class="text-gray-600 mb-6"></p>
-    <button id="confirmVote" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full font-semibold transition">Confirm Vote</button>
-    <button id="closePopup" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
   </div>
-</div>
-
-<!-- Success Message -->
-<div id="successMessage" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-  <div class="bg-green-600 text-white px-10 py-6 rounded-2xl shadow-2xl text-center">
-    <h2 class="text-2xl font-semibold">✅ Vote Submitted!</h2>
-    <p class="mt-2">Thank you for voting.</p>
-  </div>
-</div>
-
-<script>
-const voteBtns = document.querySelectorAll('.vote-btn');
-const popup = document.getElementById('votePopup');
-const candidateName = document.getElementById('candidateName');
-const partyName = document.getElementById('partyName');
-const partyLogo = document.getElementById('partyLogo');
-const confirmVote = document.getElementById('confirmVote');
-const closePopup = document.getElementById('closePopup');
-const successMessage = document.getElementById('successMessage');
-
-let selectedCandidate = null;
-
-voteBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const card = btn.closest('[data-name]');
-    selectedCandidate = card;
-    candidateName.textContent = card.dataset.name;
-    partyName.textContent = card.dataset.party;
-    partyLogo.src = card.dataset.logo;
-    popup.classList.remove('hidden');
-    popup.classList.add('flex');
-  });
-});
-
-closePopup.addEventListener('click', () => {
-  popup.classList.add('hidden');
-  popup.classList.remove('flex');
-});
-
-confirmVote.addEventListener('click', () => {
-  popup.classList.add('hidden');
-  successMessage.classList.remove('hidden');
-  successMessage.classList.add('flex');
-
-  // Disable all buttons and gray them out
-  voteBtns.forEach(btn => {
-    btn.disabled = true;
-    btn.classList.remove('bg-green-700', 'hover:bg-green-400', 'hover:text-gray-700');
-    btn.classList.add('bg-gray-400', 'cursor-not-allowed', 'text-white');
-    btn.textContent = 'Vote';
-  });
-
-  // Highlight voted candidate
-  const votedBtn = selectedCandidate.querySelector('.vote-btn');
-  votedBtn.textContent = 'Voted';
-  votedBtn.classList.remove('bg-gray-400');
-  votedBtn.classList.add('bg-green-600', 'text-white');
-
-  // Hide success message after 2s
-  setTimeout(() => {
-    successMessage.classList.add('hidden');
-    successMessage.classList.remove('flex');
-  }, 2000);
-});
-</script>
-
 </section>
 
+<!-- Login Modal -->
+<div id="loginModal"
+  class="fixed inset-0 bg-black/70 hidden justify-center items-center z-[9999]">
+  <div class="bg-white p-8 rounded-2xl w-full max-w-md relative">
+    <h2 class="text-2xl font-bold mb-6 text-center text-[#06038D]">Login to Vote</h2>
+
+    <div class="space-y-4">
+      <!-- Name -->
+      <div>
+        <label class="block text-gray-700 text-sm font-semibold mb-1">Name</label>
+        <input id="loginName" type="text"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#06038D] text-black" />
+      </div>
+
+      <!-- Age -->
+      <div>
+        <label class="block text-gray-700 text-sm font-semibold mb-1">Age</label>
+        <input id="loginAge" type="number"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#06038D] text-black" />
+      </div>
+
+      <!-- Phone + Send OTP -->
+      <div class="flex items-center space-x-2">
+        <input id="phone" type="text" placeholder="Phone Number"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#06038D] text-black" />
+        <button id="sendOtpBtn"
+          class="bg-[#06038D] text-white px-4 py-2 rounded-lg hover:bg-[#030268] text-sm font-semibold whitespace-nowrap">
+          Send OTP
+        </button>
+      </div>
+
+      <!-- OTP Field (hidden by default) -->
+      <div id="otpContainer" class="hidden">
+        <label class="block text-gray-700 text-sm font-semibold mb-1">Enter OTP</label>
+        <input id="otpInput" type="text" placeholder="Enter OTP"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#06038D] text-black" />
+      </div>
+
+      <!-- Submit -->
+      <button id="loginSubmit"
+        class="w-full bg-[#06038D] hover:bg-[#030268] text-white font-semibold py-2 rounded-lg mt-4">
+        Verify & Continue
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Vote Confirmation Modal -->
+<div id="voteConfirmModal" class="fixed inset-0 bg-black/60 hidden justify-center items-center z-[9999]">
+  <div class="bg-white p-6 rounded-xl w-80 shadow-lg text-center">
+    <h2 id="confirmText" class="text-lg font-semibold mb-4 text-gray-800"></h2>
+    <div class="flex justify-center gap-3">
+      <button id="confirmVoteBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Confirm</button>
+      <button onclick="closeConfirmModal()" class="bg-gray-300 px-4 py-2 rounded">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="fixed inset-0 bg-black/60 hidden justify-center items-center z-[9999]">
+  <div class="bg-white p-6 rounded-xl w-80 shadow-lg text-center">
+    <h2 class="text-green-700 text-xl font-bold mb-2">Vote Submitted!</h2>
+    <p class="text-gray-600 text-sm">Thank you for casting your vote.</p>
+    <button onclick="closeSuccessModal()" class="mt-3 bg-blue-600 text-white px-4 py-2 rounded">OK</button>
+  </div>
+</div>
 <script>
-  const filter = document.getElementById('constituencyFilter');
-  const cards = document.querySelectorAll('#candidatesGrid > div');
+let loggedIn = false;
+let selectedCandidate = null;
+let generatedOtp = null;
 
-  function filterCandidates(value) {
-    const lowerValue = value.toLowerCase();
-    cards.forEach(card => {
-      const constituency = card.dataset.constituency.toLowerCase();
-      if (lowerValue === 'all' || constituency === lowerValue) {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
-      }
-    });
+// ----------------------
+// 🟦 DISTRICT → CONSTITUENCY DATA
+// ----------------------
+const districtData = {
+  "Ariyalur": ["Ariyalur", "Jayankondam"],
+  "Chengalpattu": ["Tambaram", "Pallavaram", "Chengalpattu"],
+  "Chennai": ["Saidapet", "T. Nagar", "Egmore", "Royapuram", "Velachery","Kolathur"],
+  "Coimbatore": ["Coimbatore North", "Coimbatore South", "Pollachi"],
+  "Cuddalore": ["Cuddalore", "Panruti", "Kurinjipadi"],
+  "Dharmapuri": ["Dharmapuri", "Harur"],
+  "Dindigul": ["Dindigul", "Oddanchatram"],
+  "Erode": ["Erode East", "Erode West", "Perundurai"],
+  "Kallakurichi": ["Kallakurichi", "Chinnasalem"],
+  "Kanchipuram": ["Kanchipuram", "Sriperumbudur"],
+  "Kanyakumari": ["Nagercoil", "Colachel"],
+  "Karur": ["Karur", "Aravakurichi"],
+  "Krishnagiri": ["Krishnagiri", "Hosur"],
+  "Madurai": ["Madurai Central", "Madurai South", "Melur"],
+  "Mayiladuthurai": ["Mayiladuthurai", "Sirkazhi"],
+  "Nagapattinam": ["Nagapattinam", "Vedaranyam"],
+  "Namakkal": ["Namakkal", "Rasipuram"],
+  "Perambalur": ["Perambalur"],
+  "Pudukkottai": ["Pudukkottai", "Aranthangi"],
+  "Ramanathapuram": ["Ramanathapuram", "Paramakudi"],
+  "Ranipet": ["Ranipet", "Arakkonam"],
+  "Salem": ["Salem North", "Salem South", "Edappadi"],
+  "Sivagangai": ["Sivagangai", "Manamadurai"],
+  "Tenkasi": ["Tenkasi", "Sankarankovil"],
+  "Thanjavur": ["Thanjavur", "Papanasam"],
+  "Theni": ["Theni", "Bodinayakanur"],
+  "Thoothukudi": ["Thoothukudi", "Kovilpatti"],
+  "Tiruchirappalli": ["Trichy West", "Trichy East", "Lalgudi"],
+  "Tirunelveli": ["Tirunelveli", "Palayamkottai"],
+  "Tirupathur": ["Tirupathur", "Vaniyambadi"],
+  "Tiruppur": ["Tiruppur North", "Tiruppur South"],
+  "Tiruvallur": ["Avadi", "Tiruvallur", "Poonamallee"],
+  "Tiruvannamalai": ["Tiruvannamalai", "Cheyyar"],
+  "Tiruvarur": ["Tiruvarur", "Mannargudi"],
+  "Vellore": ["Vellore", "Katpadi"],
+  "Viluppuram": ["Viluppuram", "Tindivanam"],
+  "Virudhunagar": ["Virudhunagar", "Sivakasi"]
+};
+
+// ----------------------
+// 🟦 FILTER LOGIC
+// ----------------------
+const districtFilter = document.getElementById("districtFilter");
+const constituencyFilter = document.getElementById("constituencyFilter");
+const searchInput = document.getElementById("searchInput");
+const candidatesGrid = document.getElementById("candidatesGrid");
+
+// Candidate cards
+const allCandidates = [...document.querySelectorAll("#candidatesGrid .group")];
+
+// ✅ Populate districts dropdown
+function populateDistricts() {
+  districtFilter.innerHTML =
+    `<option value="all">District</option>` +
+    Object.keys(districtData)
+      .map(d => `<option value="${d}">${d}</option>`)
+      .join("");
+}
+populateDistricts();
+
+// ✅ Populate constituencies dynamically
+districtFilter.addEventListener("change", () => {
+  const selected = districtFilter.value;
+  if (selected === "all") {
+    constituencyFilter.innerHTML = `<option value="all">Constituency</option>`;
+  } else {
+    constituencyFilter.innerHTML =
+      `<option value="all">Constituency</option>` +
+      districtData[selected]
+        .map(c => `<option value="${c}">${c}</option>`)
+        .join("");
   }
+  filterCandidates();
+});
 
-  // Filter on dropdown change
-  filter.addEventListener('change', () => {
-    filterCandidates(filter.value);
+function filterCandidates() {
+  const district = districtFilter.value.toLowerCase();
+  const constituency = constituencyFilter.value.toLowerCase();
+  const search = searchInput.value.toLowerCase();
+
+  // Filter matching candidates
+  const visible = [];
+  const hidden = [];
+
+  allCandidates.forEach(card => {
+    const name = card.dataset.name.toLowerCase();
+    const party = card.dataset.party.toLowerCase();
+    const d = card.dataset.district.toLowerCase();
+    const c = card.dataset.constituency.toLowerCase();
+
+    const matches =
+      (district === "all" || d === district) &&
+      (constituency === "all" || c === constituency) &&
+      (name.includes(search) || party.includes(search));
+
+    if (matches) visible.push(card);
+    else hidden.push(card);
   });
 
-  // ✅ Reset filter on page load/refresh
-  window.addEventListener('load', () => {
-    filter.value = 'all';
-    filterCandidates('all');
+  // Reorder — visible first
+  candidatesGrid.innerHTML = "";
+  visible.forEach(card => {
+    card.classList.remove("hidden");
+    candidatesGrid.appendChild(card);
   });
+  hidden.forEach(card => {
+    card.classList.add("hidden");
+    candidatesGrid.appendChild(card);
+  });
+}
+
+// Reset filters on load
+window.addEventListener("load", () => {
+  districtFilter.value = "all";
+  constituencyFilter.innerHTML = `<option value="all">Constituency</option>`;
+  searchInput.value = "";
+  filterCandidates();
+});
+
+// Apply filtering
+[searchInput, constituencyFilter].forEach(el =>
+  el.addEventListener("input", filterCandidates)
+);
+
+// ----------------------
+// 🟩 LOGIN + OTP
+// ----------------------
+document.querySelectorAll(".group button").forEach(btn => {
+  btn.addEventListener("click", e => {
+    const candidate = e.target.closest(".group").dataset.name;
+    selectedCandidate = { name: candidate, button: e.target };
+    if (!loggedIn) openLoginModal();
+    else openConfirmModal(candidate);
+  });
+});
+
+function openLoginModal() {
+  const modal = document.getElementById("loginModal");
+  modal.style.display = "flex";
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeLoginModal();
+  });
+}
+function closeLoginModal() {
+  document.getElementById("loginModal").style.display = "none";
+}
+
+// ✅ Send OTP
+document.getElementById("sendOtpBtn").addEventListener("click", () => {
+  const phone = document.getElementById("phone").value.trim();
+  if (/^[6-9]\d{9}$/.test(phone)) {
+    generatedOtp = Math.floor(100000 + Math.random() * 900000);
+    alert(`Your OTP is ${generatedOtp}`); // Simulated OTP
+    document.getElementById("otpContainer").classList.remove("hidden");
+  } else {
+    alert("Enter a valid 10-digit Indian phone number.");
+  }
+});
+
+// ✅ Verify Login
+document.getElementById("loginSubmit").addEventListener("click", () => {
+  const name = document.getElementById("loginName").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const otp = document.getElementById("otpInput").value.trim();
+  const age = parseInt(document.getElementById("loginAge").value.trim());
+
+  if (!name || !phone || !otp || !age) return alert("Please fill all fields.");
+  if (!/^[6-9]\d{9}$/.test(phone)) return alert("Invalid phone number.");
+  if (otp != generatedOtp) return alert("Incorrect OTP.");
+  if (age < 18) return alert("You must be 18 or older to vote.");
+
+  loggedIn = true;
+  closeLoginModal();
+  openConfirmModal(selectedCandidate.name);
+});
+
+// ----------------------
+// 🟧 CONFIRM VOTE
+// ----------------------
+function openConfirmModal(candidate) {
+  const modal = document.getElementById("voteConfirmModal");
+  modal.style.display = "flex";
+  document.getElementById("confirmText").textContent = `Confirm your vote for ${candidate}?`;
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeConfirmModal();
+  });
+}
+function closeConfirmModal() {
+  document.getElementById("voteConfirmModal").style.display = "none";
+}
+document.getElementById("confirmVoteBtn").addEventListener("click", () => {
+  closeConfirmModal();
+  submitVote(selectedCandidate);
+});
+
+// ----------------------
+// 🟦 SUCCESS MODAL
+// ----------------------
+function submitVote(candidate) {
+  const btn = candidate.button;
+  btn.textContent = "Voted";
+  btn.disabled = true;
+  btn.classList.add("bg-green-700", "cursor-not-allowed");
+  document.querySelectorAll(".group button").forEach(other => {
+    if (other !== btn) {
+      other.disabled = true;
+      other.classList.add("bg-gray-400", "cursor-not-allowed");
+    }
+  });
+  const modal = document.getElementById("successModal");
+  modal.style.display = "flex";
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeSuccessModal();
+  });
+}
+function closeSuccessModal() {
+  document.getElementById("successModal").style.display = "none";
+}
 </script>
+
+
+<style>
+/* Keep card sizes consistent while filtering */
+#candidatesGrid .group {
+  min-height: 450px; /* same visual height for all cards */
+  max-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Ensure images don’t resize or stretch */
+#candidatesGrid .group img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* When hiding a card, just fade instead of collapsing layout */
+#candidatesGrid .group.hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+</style>
+
+
+
+
+
+
+
 
 
 
