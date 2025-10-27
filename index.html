@@ -99,7 +99,7 @@
   <div class="absolute inset-0 bg-black/40"></div>
 
   <div class="absolute bottom-[50%] md:bottom-[20%] left-[5%] z-20 space-y-8">
-    <h1 class="text-4xl md:text-[5rem] font-bold space-y-2 md:space-y-12 uppercase">
+    <h1 class="text-5xl md:text-[5rem] font-bold space-y-2 md:space-y-12 uppercase">
       <span class="block text-white">Your Vote Matters</span>
       <span class="block outlined-text">Be Heard!</span>
     </h1>
@@ -143,7 +143,7 @@
   <div class="absolute right-0 top-[50%] md:top-1/4 w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 bg-white/70 backdrop-blur-md border-l-4 border-[#06038D] rounded-2xl flex flex-col justify-center p-6 space-y-4 slide-box hidden md:mr-10" data-slide="1">
     <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">Participate in Democracy</h1>
     <p class="text-xs sm:text-sm md:text-sm text-gray-800 max-w-sm">
-      Stay informed about candidates, policies, and key issues to make responsible choices.
+      Stay informed about candidates, policies and key issues to make responsible choices.
     </p>
     <a href="#info-section" class="bg-[#06038D] hover:bg-[#06038D]/80 text-white font-semibold px-4 py-2 rounded-full shadow-lg transition">
       Learn More
@@ -154,7 +154,7 @@
   <div class="absolute right-0 top-[50%] md:top-1/4 w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 bg-white/70 backdrop-blur-md border-l-4 border-[#046A38] rounded-2xl flex flex-col justify-center p-6 space-y-4 slide-box hidden md:mr-10" data-slide="2">
     <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">Latest Political Updates</h1>
     <p class="text-xs sm:text-sm md:text-sm text-gray-800 max-w-sm">
-      Get the newest insights, news, and developments from the political landscape of Tamil Nadu.
+      Get the newest insights, news and developments from the political landscape of Tamil Nadu.
     </p>
     <a href="#news" class="bg-[#046A38] hover:bg-[#046A38]/80 text-white font-semibold px-4 py-2 rounded-full shadow-lg transition">
       Read Updates
@@ -202,7 +202,7 @@
       </h1>
       <p class="text-gray-800 text-lg md:text-md leading-relaxed">
         Explore the candidates contesting the Tamil Nadu Legislative Assembly Election 2026.  
-        <span class=" text-[#046A38]">Check your constituency, learn about their vision, and vote here!</span>
+        <span class=" text-[#046A38]">Check your constituency, learn about their vision and vote here!</span>
       </p>
     </div>
 
@@ -394,17 +394,61 @@ confirmVote.addEventListener('click', () => {
 
 
 
-<!-- Indian Flag Themed Info Navigation Section -->
-<section class="bg-gradient-to-r from-[#06038D] to-[red]  py-12 text-center text-white rounded-2xl mx-4 md:mx-20 mt-12 shadow-xl border border-black/20">
-  <h1 class="text-2xl md:text-3xl font-bold mb-4 drop-shadow-md">
-    Want to Know More?
-  </h1>
-  <p class="text-sm md:text-base mb-6 drop-shadow-sm">
-    Learn everything about the candidates, parties, and voting process.
+<!-- Tamil Nadu Information Preview Section -->
+<section class="bg-[#06038D] py-16 px-6 md:px-20 text-white text-center rounded-2xl mx-4 md:mx-20 mt-12 shadow-xl relative overflow-hidden">
+  
+  <!-- Decorative Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-r from-[#06038D]/90 via-[#0A0A0A]/30 to-[#FF671F]/80 opacity-80"></div>
+  
+  <div class="relative z-10">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase">Know Tamil Nadu Better</h2>
+    <p class="text-white/90 mb-10 max-w-2xl mx-auto">
+      Explore the heart of Tamil Nadu - from its people and culture to political insights and voting essentials.
+    </p>
+
+    <!-- Info Highlights -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+      
+      <!-- Card 1 -->
+      <div class="bg-white/10 backdrop-blur-lg p-8 rounded-xl border border-white/20 hover:scale-105 transition text-center">
+  <div class="flex justify-center mb-4">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
+      <path fill="#fff" d="M14.35 20.775L9 18.9l-4.65 1.8q-.25.1-.488.063t-.437-.163t-.312-.337T3 19.775V5.75q0-.325.188-.575T3.7 4.8l4.65-1.575q.15-.05.313-.075T9 3.125t.338.025t.312.075L15 5.1l4.65-1.8q.25-.1.488-.062t.437.162t.313.338t.112.487V18.25q0 .325-.187.575t-.513.375l-4.65 1.575q-.15.05-.312.075t-.338.025t-.337-.025t-.313-.075M14 18.55V6.85l-4-1.4v11.7z"/>
+    </svg>
+  </div>
+  <h3 class="font-semibold text-xl mb-2">District Insights</h3>
+  <p class="text-white/80 text-sm">Learn about Tamil Nadu’s 38 districts – their population, geography and local leadership.</p>
+</div>
+
+
+     <!-- Card 2 -->
+<div class="bg-white/10 backdrop-blur-lg p-8 rounded-xl border border-white/20 hover:scale-105 transition text-center">
+  <div class="flex justify-center mb-4">
+    <img src="./static/images/parliament.png" alt="Parliament Icon" class="w-12 h-12 object-contain">
+  </div>
+  <h3 class="font-semibold text-xl mb-2">Political Overview</h3>
+  <p class="text-white/80 text-sm">
+    Know the major parties, leaders and movements shaping Tamil Nadu’s democracy.
   </p>
-  <a href="information.html" class="bg-white/90 text-[#FF671F] font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-white transition-all duration-300 hover:scale-105">
-    Go to Info Page
-  </a>
+</div>
+
+      <!-- Card 3 -->
+      <div class="bg-white/10 backdrop-blur-lg p-8 rounded-xl border border-white/20 hover:scale-105 transition">
+<div class="flex justify-center mb-4">
+    <img src="./static/images/vote.png" alt="Parliament Icon" class="w-12 h-12 object-contain">
+  </div>        <h3 class="font-semibold text-xl mb-2">Voting Essentials</h3>
+        <p class="text-white/80 text-sm">Get voter info, learn about polling dates and understand how your vote counts.</p>
+      </div>
+
+    </div>
+
+    <!-- Button -->
+    <div class="mt-12">
+      <a href="information.html" class="bg-white text-[#06038D] font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-white/90 transition-all duration-300 hover:scale-105">
+        Visit Information Page →
+      </a>
+    </div>
+  </div>
 </section>
 
 
@@ -421,7 +465,7 @@ confirmVote.addEventListener('click', () => {
       </div>
 
       <!-- Form Panel -->
-      <div class="bg-gray-200 p-8 sm:p-12 rounded-xl shadow-xl relative z-10 order-2 lg:order-1 lg:w-[110%]">
+      <div class="bg-gray-200 py-8 px-4 sm:p-12 rounded-xl shadow-xl relative z-10 order-2 lg:order-1 lg:w-[110%]">
         <form class="space-y-6">
 
           <!-- Name Fields -->
@@ -459,7 +503,7 @@ confirmVote.addEventListener('click', () => {
           <!-- Submit -->
           <div class="text-center lg:text-left">
             <button type="submit"
-                    class="bg-[#06038D] hover:bg-[#2C38C5] text-white font-semibold px-8 py-3 rounded-md transition-colors duration-300">
+                    class="bg-gradient-to-r from-[#06038D] to-[red] hover:bg-[#2C38C5] text-white font-semibold px-8 py-3 rounded-md transition-colors duration-300">
               Submit Opinion
             </button>
           </div>
@@ -519,7 +563,7 @@ confirmVote.addEventListener('click', () => {
         <p class="text-sm text-gray-600 mt-3">
           As the 2026 Tamil Nadu Assembly elections draw closer, major parties including DMK and AIADMK 
           are reorganizing their alliances. Party leaders have begun statewide tours, focusing on youth engagement, 
-          women’s welfare, and economic growth to strengthen their campaign narratives.
+          women’s welfare and economic growth to strengthen their campaign narratives.
         </p>
       </div>
     </div>
@@ -559,7 +603,7 @@ confirmVote.addEventListener('click', () => {
           <p class="text-xs text-gray-600">18:22</p>
         </div>
         <p class="text-sm text-gray-600 mt-3">
-          A deep dive into the campaign strategies, voter outreach, and alliance talks shaping 
+          A deep dive into the campaign strategies, voter outreach and alliance talks shaping 
           Tamil Nadu’s 2026 political race. Analysts discuss key moves from both Dravidian majors.
         </p>
       </div>
@@ -629,13 +673,13 @@ confirmVote.addEventListener('click', () => {
 </section>
 
 
-  <footer class="bg-[#06038D] py-12 border-t border-neutral-800">
+  <footer class="bg-[#09121b] py-12 border-t border-neutral-800">
     <div class="container mx-auto px-8 flex flex-col md:flex-row justify-between gap-8">
       
       <div>
         <p class="font-mono uppercase tracking-wider text-gray-200">TN Polls 2026</p>
         <p class="mt-4 text-sm text-gray-400 max-w-5xl">Stay informed with the latest updates from the Tamil Nadu Legislative Assembly Elections. 
-        Explore candidate profiles, polling information, and news insights - all in one place.</p>
+        Explore candidate profiles, polling information and news insights - all in one place.</p>
       </div>
 
 <div class="flex flex-col md:flex-row gap-8 md:gap-16 text-gray-400">
