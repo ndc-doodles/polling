@@ -95,7 +95,7 @@
         <span class="block text-white">Your Vote Matters</span>
         <span class="block outlined-text">Be Heard!</span>
       </h1>
-      <p class="text-white/90">Be informed, be responsible, and make your voice heard</p>
+      <p class="text-white/90">Be informed, be responsible and make your voice heard</p>
     </div>
   </div>
 
@@ -110,7 +110,7 @@
 
 </h1>
 
-      <p class="text-white/90">Explore policies, promises, and visions before casting your vote</p>
+      <p class="text-white/90">Explore policies, promises and visions before casting your vote</p>
     </div>
   </div>
 
@@ -210,57 +210,119 @@
 
   <!-- Candidates Grid -->
 <div id="candidatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 auto-rows-[400px]">
-    
-    <!-- Candidate Card Example -->
-    <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition cursor-pointer bg-white" data-constituency="Edappadi">
-      <img src="./static/images/palaniswami.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-      <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
-      <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-        <h1 class="text-xl md:text-2xl font-bold">Edappadi K. Palaniswami</h1>
-        <p class="text-sm mt-1">Constituency: Edappadi</p>
-        <p class="text-sm">Party: All India Anna Dravida Munnetra Kazhagam (AIADMK)</p>
-        <button class="mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
-      </div>
+  <!-- Candidate Card Example -->
+  <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white" data-name="Edappadi K. Palaniswami" data-party="AIADMK" data-logo="./static/images/aiadmk.png">
+    <img src="./static/images/palaniswami.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+    <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
+    <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+      <h1 class="text-xl md:text-2xl font-bold">Edappadi K. Palaniswami</h1>
+      <p class="text-sm mt-1">Constituency: Edappadi</p>
+      <p class="text-sm">Party: AIADMK</p>
+      <button class="vote-btn mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
     </div>
-
-    <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition cursor-pointer bg-white" data-constituency="Madurantakam">
-      <img src="./static/images/Maragatham .jpg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-      <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
-      <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-        <h1 class="text-xl md:text-2xl font-bold">K. Maragatham</h1>
-        <p class="text-sm mt-1">Constituency: Madurantakam</p>
-        <p class="text-sm">Party: Madurantakam</p>
-        <button class="mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
-      </div>
-    </div>
-
-    <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition cursor-pointer bg-white" data-constituency="Coimbatore">
-      <img src="./static/images/annamalai.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-      <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
-      <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-        <h1 class="text-xl md:text-2xl font-bold">Annamalai K</h1>
-        <p class="text-sm mt-1">Constituency: Coimbatore</p>
-        <p class="text-sm">Party: Bharatiya Janata Party (BJP)</p>
-        <button class="mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
-      </div>
-    </div>
-
-    <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition cursor-pointer bg-white" data-constituency="New Delhi">
-      <img src="./static/images/palaniswami.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-      <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
-      <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-        <h1 class="text-xl md:text-2xl font-bold">Edappadi K. Palaniswami</h1>
-        <p class="text-sm mt-1">Constituency: New Delhi</p>
-        <p class="text-sm">Party: People's Voice</p>
-        <button class="mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
-      </div>
-    </div>
-
   </div>
+
+  <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white" data-name="K. Maragatham" data-party="AIADMK" data-logo="./static/images/aiadmk.png">
+    <img src="./static/images/Maragatham .jpg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+    <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
+    <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+      <h1 class="text-xl md:text-2xl font-bold">K. Maragatham</h1>
+      <p class="text-sm mt-1">Constituency: Madurantakam</p>
+      <p class="text-sm">Party: AIADMK</p>
+      <button class="vote-btn mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
+    </div>
+  </div>
+
+  <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white" data-name="Annamalai K" data-party="BJP" data-logo="./static/images/bjp.png">
+    <img src="./static/images/annamalai.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+    <img src="./static/images/bjp.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
+    <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+      <h1 class="text-xl md:text-2xl font-bold">Annamalai K</h1>
+      <p class="text-sm mt-1">Constituency: Coimbatore</p>
+      <p class="text-sm">Party: BJP</p>
+      <button class="vote-btn mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
+    </div>
+  </div>
+</div>
+
+<!-- Vote Popup -->
+<div id="votePopup" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-xl shadow-2xl p-6 w-[90%] max-w-sm text-center relative">
+    <img id="partyLogo" src="" alt="Party Logo" class="w-20 h-20 mx-auto mb-4 rounded-full shadow-md object-contain">
+    <h2 id="candidateName" class="text-2xl font-bold text-gray-800 mb-2"></h2>
+    <p id="partyName" class="text-gray-600 mb-6"></p>
+    <button id="confirmVote" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full font-semibold transition">Confirm Vote</button>
+    <button id="closePopup" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+  </div>
+</div>
+
+<!-- Success Message -->
+<div id="successMessage" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+  <div class="bg-green-600 text-white px-10 py-6 rounded-2xl shadow-2xl text-center">
+    <h2 class="text-2xl font-semibold">✅ Vote Submitted!</h2>
+    <p class="mt-2">Thank you for voting.</p>
+  </div>
+</div>
+
+<script>
+const voteBtns = document.querySelectorAll('.vote-btn');
+const popup = document.getElementById('votePopup');
+const candidateName = document.getElementById('candidateName');
+const partyName = document.getElementById('partyName');
+const partyLogo = document.getElementById('partyLogo');
+const confirmVote = document.getElementById('confirmVote');
+const closePopup = document.getElementById('closePopup');
+const successMessage = document.getElementById('successMessage');
+
+let selectedCandidate = null;
+
+voteBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('[data-name]');
+    selectedCandidate = card;
+    candidateName.textContent = card.dataset.name;
+    partyName.textContent = card.dataset.party;
+    partyLogo.src = card.dataset.logo;
+    popup.classList.remove('hidden');
+    popup.classList.add('flex');
+  });
+});
+
+closePopup.addEventListener('click', () => {
+  popup.classList.add('hidden');
+  popup.classList.remove('flex');
+});
+
+confirmVote.addEventListener('click', () => {
+  popup.classList.add('hidden');
+  successMessage.classList.remove('hidden');
+  successMessage.classList.add('flex');
+
+  // Disable all buttons and gray them out
+  voteBtns.forEach(btn => {
+    btn.disabled = true;
+    btn.classList.remove('bg-green-700', 'hover:bg-green-400', 'hover:text-gray-700');
+    btn.classList.add('bg-gray-400', 'cursor-not-allowed', 'text-white');
+    btn.textContent = 'Vote';
+  });
+
+  // Highlight voted candidate
+  const votedBtn = selectedCandidate.querySelector('.vote-btn');
+  votedBtn.textContent = 'Voted';
+  votedBtn.classList.remove('bg-gray-400');
+  votedBtn.classList.add('bg-green-600', 'text-white');
+
+  // Hide success message after 2s
+  setTimeout(() => {
+    successMessage.classList.add('hidden');
+    successMessage.classList.remove('flex');
+  }, 2000);
+});
+</script>
+
 </section>
 
 <script>
@@ -301,53 +363,54 @@
   <div class="container mx-auto px-6 lg:px-20">
     <div class="relative grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
 
-      <!-- Info Panel Column (Mobile First) -->
-      <div class="bg-[#06038D] text-white p-12 rounded-xl shadow-2xl relative z-20 order-1 lg:order-2">
-        <h1 class="text-4xl font-bold mb-4">Public Opinion Form</h1>
-        <p class="text-lg text-gray-200 leading-relaxed">
+      <!-- Info Panel -->
+      <div class="bg-[#06038D] text-white p-10 sm:p-12 rounded-xl shadow-2xl relative z-20 order-1 lg:order-2 text-center lg:text-left">
+        <h1 class="text-3xl sm:text-4xl font-bold mb-4">Public Opinion Form</h1>
+        <p class="text-base sm:text-lg text-gray-200 leading-relaxed">
           We value your thoughts! Please share your opinion, feedback, or suggestions to help us improve services and make informed decisions. Your responses will remain confidential.
         </p>
       </div>
 
-      <!-- Form Column -->
-      <div class="bg-gray-200 p-12 rounded-xl shadow-xl relative z-10 order-2 lg:order-1 lg:w-[110%]">
+      <!-- Form Panel -->
+      <div class="bg-gray-200 p-8 sm:p-12 rounded-xl shadow-xl relative z-10 order-2 lg:order-1 lg:w-[110%]">
         <form class="space-y-6">
-          <!-- Name -->
-          <div class="grid grid-cols-2 gap-6">
+
+          <!-- Name Fields -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label class="block text-sm font-bold text-gray-700 mb-1 uppercase" for="first-name">First Name</label>
+              <label for="first-name" class="block text-sm font-bold text-gray-700 mb-1 uppercase">First Name</label>
               <input type="text" id="first-name" name="first-name"
-                     class="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                     class="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#06038D]"
                      placeholder="First Name" required>
             </div>
             <div>
-              <label class="block text-sm font-bold text-gray-700 mb-1 uppercase" for="last-name">Last Name</label>
+              <label for="last-name" class="block text-sm font-bold text-gray-700 mb-1 uppercase">Last Name</label>
               <input type="text" id="last-name" name="last-name"
-                     class="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                     class="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#06038D]"
                      placeholder="Last Name" required>
             </div>
           </div>
 
           <!-- Email -->
           <div>
-            <label class="block text-sm font-bold text-gray-700 mb-1 uppercase" for="email">Email Address</label>
+            <label for="email" class="block text-sm font-bold text-gray-700 mb-1 uppercase">Email Address</label>
             <input type="email" id="email" name="email"
-                   class="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                   class="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#06038D]"
                    placeholder="you@example.com" required>
           </div>
 
-          <!-- Opinion/Rating -->
+          <!-- Opinion -->
           <div>
-            <label class="block text-sm font-bold text-gray-700 mb-1 uppercase" for="opinion">Your Opinion</label>
+            <label for="opinion" class="block text-sm font-bold text-gray-700 mb-1 uppercase">Your Opinion</label>
             <textarea id="opinion" name="opinion" rows="5"
-                      class="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                      class="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#06038D]"
                       placeholder="Share your opinion, feedback, or suggestions…" required></textarea>
           </div>
 
           <!-- Submit -->
-          <div>
+          <div class="text-center lg:text-left">
             <button type="submit"
-                    class="inline-block bg-[#06038D] text-white font-semibold px-6 py-3 rounded-md transition-colors duration-300 hover:bg-[#2C38C5]">
+                    class="bg-[#06038D] hover:bg-[#2C38C5] text-white font-semibold px-8 py-3 rounded-md transition-colors duration-300">
               Submit Opinion
             </button>
           </div>
@@ -373,6 +436,7 @@
 
 
 
+
 <div id="news">
 
 </div>
@@ -382,7 +446,7 @@
 
 
 <section class="max-w-7xl mx-auto py-12 px-6 mt-10 text-black max-md:mt-0 max-md:py-2">
-  <h1 class="text-4xl font-bold text-center mb-10 border-b pb-3 border-gray-300 inline-block uppercase text-black">
+  <h1 class="text-4xl font-bold text-left  mb-10 border-b pb-3 border-gray-300 inline-block uppercase text-black">
     Latest Updates
   </h1>
 
