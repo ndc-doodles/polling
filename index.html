@@ -88,16 +88,31 @@
 
   <!-- Slide 2 -->
   <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 slide">
-    <img src="./static/images/img0.jpg" class="w-full h-full object-cover" alt="Chennai">
-    <div class="absolute inset-0 bg-black/40"></div>
-    <div class="absolute bottom-[50%] md:bottom-[20%]  left-[5%] z-20 space-y-8">
-      <h1 class="text-5xl md:text-[5rem] font-bold space-y-2 md:space-y-12 uppercase">
-        <span class="block text-white">Your Vote Matters</span>
-        <span class="block outlined-text">Be Heard!</span>
-      </h1>
-      <p class="text-white/90">Be informed, be responsible and make your voice heard</p>
-    </div>
+
+  <!-- Desktop / Tablet Image -->
+  <img src="./static/images/img0.jpg" 
+       class="hidden md:block w-full h-full object-cover" 
+       alt="Chennai">
+
+  <!-- Mobile Image -->
+  <img src="./static/images/mobile_img0.jpg" 
+       class="block md:hidden w-full h-full object-cover" 
+       alt="Chennai Mobile">
+
+  <div class="absolute inset-0 bg-black/40"></div>
+
+  <div class="absolute bottom-[50%] md:bottom-[20%] left-[5%] z-20 space-y-8">
+    <h1 class="text-4xl md:text-[5rem] font-bold space-y-2 md:space-y-12 uppercase">
+      <span class="block text-white">Your Vote Matters</span>
+      <span class="block outlined-text">Be Heard!</span>
+    </h1>
+    <p class="text-white/90 text-sm md:text-base">
+      Be informed, be responsible and make your voice heard
+    </p>
   </div>
+
+</div>
+
 
   <!-- Slide 3 -->
   <div class="absolute inset-0 opacity-0 transition-opacity duration-1000 slide">
@@ -110,7 +125,7 @@
 
 </h1>
 
-      <p class="text-white/90">Explore policies, promises and visions before casting your vote</p>
+      <p class="text-white/90">Explore policies promises and visions before casting your vote</p>
     </div>
   </div>
 
@@ -229,7 +244,7 @@
      data-constituency="Edappadi">
     <img src="./static/images/palaniswami.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-    <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
+    <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20  object-contain p-1">
     <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
       <h1 class="text-xl md:text-2xl font-bold">Edappadi K. Palaniswami</h1>
       <p class="text-sm mt-1">Constituency: Edappadi</p>
@@ -239,33 +254,33 @@
   </div>
 
 <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white"
-     data-name="K. Maragatham"
+     data-name="K. Annamalai"
      data-party="AIADMK"
-     data-logo="./static/images/aiadmk.png"
+     data-logo="./static/images/bjp.png"
      data-constituency="Madurantakam">
-    <img src="./static/images/Maragatham .jpg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
+    <img src="./static/images/annamalai.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-    <img src="./static/images/aiadmk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
+    <img src="./static/images/bjp.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20  object-contain p-1">
     <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-      <h1 class="text-xl md:text-2xl font-bold">K. Maragatham</h1>
-      <p class="text-sm mt-1">Constituency: Madurantakam</p>
-      <p class="text-sm">Party: AIADMK</p>
+      <h1 class="text-xl md:text-2xl font-bold">K. Annamalai</h1>
+      <p class="text-sm mt-1">Constituency: Coimbatore</p>
+      <p class="text-sm">Party: BJP</p>
       <button class="vote-btn mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
     </div>
   </div>
 
 <div class="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white"
-     data-name="Annamalai K"
+     data-name="Vijay"
      data-party="BJP"
-     data-logo="./static/images/bjp.png"
+     data-logo="./static/images/tvk.png"
      data-constituency="Coimbatore">
-    <img src="./static/images/annamalai.jpeg" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
+    <img src="./static/images/vijay.png" alt="Candidate" class="w-full h-full sm:h-80 md:h-full object-cover transform group-hover:scale-105 transition duration-500">
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-    <img src="./static/images/bjp.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20 rounded-full shadow-lg object-contain p-1">
+    <img src="./static/images/tvk.png" alt="Party Logo" class="absolute top-3 right-3 w-20 h-20  object-contain p-1">
     <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-      <h1 class="text-xl md:text-2xl font-bold">Annamalai K</h1>
+      <h1 class="text-xl md:text-2xl font-bold">Vijay</h1>
       <p class="text-sm mt-1">Constituency: Coimbatore</p>
-      <p class="text-sm">Party: BJP</p>
+      <p class="text-sm">Party: TVK</p>
       <button class="vote-btn mt-3 bg-green-700 hover:bg-green-400 hover:text-gray-700 px-7 py-2 rounded-full font-semibold transition">Vote</button>
     </div>
   </div>
