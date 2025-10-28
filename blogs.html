@@ -1080,13 +1080,12 @@ showSlide(current);
         if (titleEl) title = titleEl.innerText.trim();
       }
 
-      // === Build full shareable link (absolute URL) ===
-      // === Build full shareable link (absolute URL for GitHub Pages) ===
-const baseUrl = "https://ndc-doodles.github.io/polling"; // 🟢 Replace with your GitHub Pages URL
-const shareLink = `${baseUrl}/blog_detail.html?title=${encodeURIComponent(title)}`;
-const pageUrl = encodeURIComponent(shareLink);
-const text = encodeURIComponent(`${title}\nRead more: ${shareLink}`);
-
+      // === Build full shareable link (Dynamic + GitHub Pages compatible) ===
+      const currentPath = window.location.pathname.replace(/\/[^/]*$/, '');
+      const baseUrl = `${window.location.origin}${currentPath}`;
+      const shareLink = `${baseUrl}/blog_detail.html?title=${encodeURIComponent(title)}`;
+      const encodedLink = encodeURIComponent(shareLink);
+      const encodedTitle = encodeURIComponent(title);
 
       const platform = opt.dataset.platform;
       let shareUrl = '';
@@ -1094,17 +1093,18 @@ const text = encodeURIComponent(`${title}\nRead more: ${shareLink}`);
       // === Platform-specific share URLs ===
       switch (platform) {
         case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${encodeURIComponent(title)}`;
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedLink}`;
           break;
         case 'twitter':
         case 'x':
-          shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${pageUrl}`;
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedLink}`;
           break;
         case 'whatsapp':
-          shareUrl = `https://wa.me/?text=${text}`;
+          // ✅ Mobile and Desktop friendly WhatsApp format
+          shareUrl = `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedLink}`;
           break;
         case 'linkedin':
-          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedLink}`;
           break;
         default:
           // Fallback — copy link to clipboard
@@ -1123,6 +1123,7 @@ const text = encodeURIComponent(`${title}\nRead more: ${shareLink}`);
   });
 })();
 </script>
+
 
 
 
