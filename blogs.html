@@ -1038,13 +1038,13 @@ showSlide(current);
 
 <script>
 (function () {
-  // Toggle popup visibility
+  // === Toggle popup visibility ===
   document.querySelectorAll('.share-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       const popup = btn.nextElementSibling;
 
-      // Close other popups
+      // Close other open popups
       document.querySelectorAll('.share-popup').forEach(p => {
         if (p !== popup) p.classList.add('hidden');
       });
@@ -1054,41 +1054,42 @@ showSlide(current);
     });
   });
 
-  // Close all popups on document click
+  // === Close all popups when clicking outside ===
   document.addEventListener('click', () => {
     document.querySelectorAll('.share-popup').forEach(p => p.classList.add('hidden'));
   });
 
-  // Share platform handling
+  // === Handle platform-specific sharing ===
   document.querySelectorAll('.share-popup button[data-platform]').forEach(opt => {
     opt.addEventListener('click', e => {
       e.stopPropagation();
 
-      // Find parent container (handles different card layouts)
+      // Find the nearest parent container (supports various card layouts)
       const container =
         opt.closest('[id^="slide"]') ||
         opt.closest('.cursor-pointer') ||
         opt.closest('.relative') ||
         opt.closest('div');
 
-      // ✅ Find the nearest title outside the share popup
+      // ✅ Extract the nearest title outside popup
       let title = 'Latest News';
       if (container) {
         const titleEl = Array.from(
           container.querySelectorAll('h1, h2, h3, h4, .news-title')
-        ).find(el => !el.closest('.share-popup')); // Ignore popup headings
+        ).find(el => !el.closest('.share-popup')); // ignore headings inside popup
         if (titleEl) title = titleEl.innerText.trim();
       }
 
-      // Create shareable link
-      const shareLink = `blog_detail.html?title=${encodeURIComponent(title)}`;
+      // === Build full shareable link (absolute URL) ===
+      const baseUrl = window.location.origin; // e.g., https://yourwebsite.com
+      const shareLink = `${baseUrl}/blog_detail.html?title=${encodeURIComponent(title)}`;
       const pageUrl = encodeURIComponent(shareLink);
       const text = encodeURIComponent(`${title}\nRead more: ${shareLink}`);
 
       const platform = opt.dataset.platform;
       let shareUrl = '';
 
-      // Platform-specific share URLs
+      // === Platform-specific share URLs ===
       switch (platform) {
         case 'facebook':
           shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${encodeURIComponent(title)}`;
@@ -1104,22 +1105,23 @@ showSlide(current);
           shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
           break;
         default:
-          // Copy link fallback
+          // Fallback — copy link to clipboard
           navigator.clipboard.writeText(`${title} - ${shareLink}`)
             .then(() => alert('✅ Link copied to clipboard'))
             .catch(() => console.warn('Clipboard unavailable'));
           return;
       }
 
-      // Open share window
+      // === Open share window ===
       window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=500');
 
-      // Close popup after click
+      // === Close popup after sharing ===
       opt.closest('.share-popup')?.classList.add('hidden');
     });
   });
 })();
 </script>
+
 
 
 
