@@ -1081,10 +1081,12 @@ showSlide(current);
       }
 
       // === Build full shareable link (absolute URL) ===
-      const baseUrl = window.location.origin; // e.g., https://yourwebsite.com
-      const shareLink = `${baseUrl}/blog_detail.html?title=${encodeURIComponent(title)}`;
-      const pageUrl = encodeURIComponent(shareLink);
-      const text = encodeURIComponent(`${title}\nRead more: ${shareLink}`);
+      // === Build full shareable link (absolute URL for GitHub Pages) ===
+const baseUrl = "https://ndc-doodles.github.io/polling"; // 🟢 Replace with your GitHub Pages URL
+const shareLink = `${baseUrl}/blog_detail.html?title=${encodeURIComponent(title)}`;
+const pageUrl = encodeURIComponent(shareLink);
+const text = encodeURIComponent(`${title}\nRead more: ${shareLink}`);
+
 
       const platform = opt.dataset.platform;
       let shareUrl = '';
