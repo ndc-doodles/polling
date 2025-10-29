@@ -201,12 +201,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const shortDesc = description.length > 180 ? description.substring(0, 180) + "..." : description;
 
       // --- Construct formatted share message ---
-      const formattedText = `**${title}**\n\n${shortDesc}\n\n👉 Read more: ${readMoreUrl}`;
+      // ✅ WhatsApp style (bold heading, text, read more)
+      const formattedText = `*${title}*\n\n${shortDesc}\n\n👉 Read more: ${readMoreUrl}`;
 
       // --- Try using Web Share API first ---
       if (navigator.share) {
         try {
-          const shareData = { title, text: `${title}\n\n${shortDesc}\n\nRead more: ${readMoreUrl}`, url: readMoreUrl };
+          const shareData = {
+            title,
+            text: `${title}\n\n${shortDesc}\n\nRead more: ${readMoreUrl}`,
+            url: readMoreUrl
+          };
 
           if (navigator.canShare && image) {
             const response = await fetch(image);
@@ -239,6 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
           shareUrl = `https://twitter.com/intent/tweet?text=${encodedFormatted}`;
           break;
         case 'whatsapp':
+          // ✅ Updated format: shows exactly like your screenshot
           shareUrl = `https://api.whatsapp.com/send?text=${encodedFormatted}`;
           break;
         case 'linkedin':
@@ -258,9 +264,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const title = card.dataset.title;
       const date = card.dataset.date;
-
-      // ✅ Fix: Ensure image path is absolute
       let image = card.dataset.image || '';
+
+      // ✅ Ensure image path is absolute
       if (image && !image.startsWith('http')) {
         image = new URL(image, window.location.origin).href;
       }
@@ -279,7 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 })();
-
 
 // === Detail Page Rendering ===
 document.addEventListener('DOMContentLoaded', () => {
