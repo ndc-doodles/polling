@@ -197,24 +197,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = card.dataset.title || '';
       const description = card.dataset.description || '';
 
-      // ✅ Handle both GitHub Pages and localhost URLs
+      // ✅ Auto-detect hosting environment (localhost / GitHub Pages)
       const baseUrl = `${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, '/')}`;
       const readMoreUrl = `${baseUrl}blog_detail.html`;
 
-      // ✅ Fix image path properly
+      // ✅ Fix image URL
       let image = card.dataset.image || '';
       if (image && !image.startsWith('http')) {
         image = new URL(image, baseUrl).href;
       }
 
-      // ✅ Shorten long descriptions
       const shortDesc = description.length > 180 ? description.substring(0, 180) + "..." : description;
 
-      // ✅ Proper formatted share text (image first, then heading, then description, then link)
+      // ✅ Formatted message
       const formattedText =
-        `📸 ${image}\n\n📰 *${title}*\n\n${shortDesc}\n\n👉 Read more: ${readMoreUrl}`;
+        `📸 ${image}\n\n📰 ${title.toUpperCase()}\n\n${shortDesc}\n\n👉 Read more: ${readMoreUrl}`;
 
-      // --- Try Web Share API first ---
+      // === Try native Web Share API first ===
       if (navigator.share) {
         try {
           const shareData = {
@@ -229,25 +228,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // --- Fallback share URLs ---
-      const encodedFormatted = encodeURIComponent(formattedText);
-      const encodedReadMore = encodeURIComponent(readMoreUrl);
-      const encodedTitle = encodeURIComponent(title);
-      const encodedDesc = encodeURIComponent(shortDesc);
+      // === Encode the text properly for all platforms ===
+      const encodedText = encodeURIComponent(formattedText)
+        .replace(/%0A/g, '%0D%0A'); // ensure line breaks are respected
 
       let shareUrl = '';
       switch (opt.dataset.platform) {
         case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedReadMore}&quote=${encodedTitle}%0A${encodedDesc}`;
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(readMoreUrl)}&quote=${encodedText}`;
           break;
         case 'twitter':
-          shareUrl = `https://twitter.com/intent/tweet?text=${encodedFormatted}`;
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodedText}`;
           break;
         case 'whatsapp':
-          shareUrl = `https://api.whatsapp.com/send?text=${encodedFormatted}`;
+          shareUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
           break;
         case 'linkedin':
-          shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedReadMore}&title=${encodedTitle}&summary=${encodedDesc}`;
+          shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(readMoreUrl)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(shortDesc)}`;
           break;
       }
 
