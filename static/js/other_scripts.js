@@ -229,24 +229,28 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // === News card click to open detail page ===
-  document.querySelectorAll('.news-card').forEach(card => {
-    card.addEventListener('click', e => {
-      if (e.target.closest('.share-btn') || e.target.closest('.share-popup')) return;
+ // === News card click to open detail page ===
+document.querySelectorAll('.news-card').forEach(card => {
+  card.addEventListener('click', e => {
+    if (e.target.closest('.share-btn') || e.target.closest('.share-popup')) return; // Prevent conflict
 
-      const title = card.dataset.title || 'Untitled';
-      const date = card.dataset.date || '';
-      const image = card.dataset.image || '';
-      const description = card.dataset.description || '';
+    const title = card.dataset.title || 'Untitled';
+    const date = card.dataset.date || '';
+    const image = card.dataset.image || '';
+    const description = card.dataset.description || '';
 
-      const content = `
-        <p>${description}</p>
-        <p class="mt-4">Stay tuned for more in-depth analysis and updates on this topic.</p>
-      `;
+    const content = `
+      <h2 class="text-3xl font-extrabold mb-4" style="font-weight: 800;">${title}</h2>
+      <p class="text-gray-600 mb-2">${date}</p>
+      <p class="text-gray-800 leading-relaxed">${description}</p>
+      <p class="mt-4 text-gray-700">Stay tuned for more in-depth analysis and updates on this topic.</p>
+    `;
 
-      localStorage.setItem('selectedNews', JSON.stringify({ title, date, image, description, content }));
-      window.location.href = 'blog_detail.html';
-    });
+    localStorage.setItem('selectedNews', JSON.stringify({ title, date, image, description, content }));
+    window.location.href = 'blog_detail.html';
   });
+});
+
 })();
 
 
