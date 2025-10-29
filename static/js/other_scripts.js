@@ -53,130 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-(function () {
-  // === Toggle share popup visibility ===
-  document.querySelectorAll('.share-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      const popup = btn.nextElementSibling;
-
-      // Close other popups
-      document.querySelectorAll('.share-popup').forEach(p => {
-        if (p !== popup) p.classList.add('hidden');
-      });
-
-      popup.classList.toggle('hidden');
-    });
-  });
-
-  // === Close popups on outside click ===
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.share-popup').forEach(p => p.classList.add('hidden'));
-  });
-
-  // === Share Logic ===
-  document.querySelectorAll('.share-popup button[data-platform]').forEach(opt => {
-    opt.addEventListener('click', async e => {
-      e.stopPropagation();
-      const card = opt.closest('.news-card');
-      const title = card.dataset.title || '';
-      const description = card.dataset.description || '';
-      const image = card.dataset.image || '';
-      const pageUrl = window.location.href;
-
-      const shortDesc = description.length > 200 ? description.substring(0, 200) + "..." : description;
-
-      // --- Try using Web Share API first ---
-      if (navigator.share) {
-        try {
-          const shareData = { title, text: shortDesc, url: pageUrl };
-
-          if (navigator.canShare && image) {
-            const response = await fetch(image);
-            const blob = await response.blob();
-            const file = new File([blob], "news-image.jpg", { type: blob.type });
-            if (navigator.canShare({ files: [file] })) {
-              shareData.files = [file];
-            }
-          }
-
-          await navigator.share(shareData);
-          return;
-        } catch (err) {
-          console.warn('Native share failed, falling back:', err);
-        }
-      }
-
-      // --- Fallback links ---
-      const encodedTitle = encodeURIComponent(title);
-      const encodedDesc = encodeURIComponent(shortDesc);
-      const encodedUrl = encodeURIComponent(pageUrl);
-
-      let shareUrl = '';
-      switch (opt.dataset.platform) {
-        case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedTitle}%0A${encodedDesc}`;
-          break;
-        case 'twitter':
-          shareUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}%0A${encodedDesc}&url=${encodedUrl}`;
-          break;
-        case 'whatsapp':
-          shareUrl = `https://api.whatsapp.com/send?text=${encodedTitle}%0A${encodedDesc}%0A${encodedUrl}`;
-          break;
-        case 'linkedin':
-          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
-          break;
-      }
-
-      window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=500');
-      opt.closest('.share-popup')?.classList.add('hidden');
-    });
-  });
-
-// === Open Detail Page ===
-document.querySelectorAll('.news-card').forEach(card => {
-  card.addEventListener('click', e => {
-    if (e.target.closest('.share-btn') || e.target.closest('.share-popup')) return;
-
-    const title = card.dataset.title;
-    const date = card.dataset.date;
-
-    // ✅ FIX: make image absolute
-    let image = card.dataset.image || '';
-    if (image && !image.startsWith('http')) {
-      image = new URL(image, window.location.origin).href;
-    }
-
-    const description = card.dataset.description;
-    const category = card.dataset.category || "General";
-
-    const content = `
-      <p>${description}</p>
-      <p class="mt-4">Stay tuned for more updates on this issue.</p>
-    `;
-
-    localStorage.setItem('selectedNews', JSON.stringify({ title, date, image, description, category, content }));
-    window.location.href = `blog_detail.html?title=${encodeURIComponent(title)}`;
-
-  });
-});
-
-})();
-
-
-// === Detail Page Rendering ===
-document.addEventListener('DOMContentLoaded', () => {
-  const news = JSON.parse(localStorage.getItem('selectedNews'));
-  if (!news) return;
-
-  document.querySelector('#news-title').innerText = news.title;
-  document.querySelector('#news-date').innerText = `Published: ${news.date}`;
-  document.querySelector('#news-image').src = news.image || './static/images/default-news.jpg';
-  document.querySelector('#news-description').innerHTML = news.content;
-  document.querySelector('#news-category span').innerText = news.category;
-});
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const slides = [
@@ -286,3 +162,114 @@ document.addEventListener('DOMContentLoaded', () => {
     stop: clearTimers
   };
 });
+
+
+
+
+(function () {
+  // === Toggle share popup visibility ===
+  document.querySelectorAll('.share-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const popup = btn.nextElementSibling;
+
+      // Close other popups
+      document.querySelectorAll('.share-popup').forEach(p => {
+        if (p !== popup) p.classList.add('hidden');
+      });
+
+      popup.classList.toggle('hidden');
+    });
+  });
+
+  // === Close all popups on outside click ===
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.share-popup').forEach(p => p.classList.add('hidden'));
+  });
+
+  // === Platform-specific sharing (with heading, paragraph, and read more link) ===
+  document.querySelectorAll('.share-popup button[data-platform]').forEach(opt => {
+    opt.addEventListener('click', e => {
+      e.stopPropagation();
+
+      const container = opt.closest('.news-card');
+      const title = container?.dataset.title || 'Latest News';
+      const description = container?.dataset.description?.slice(0, 120) || '';
+      const detailPage = `${window.location.origin}/polling/blog_detail.html`;
+
+      // Message structure for sharing
+      const message = `📰 ${title}\n\n${description}...\n\nRead more: ${detailPage}`;
+      const encodedMessage = encodeURIComponent(message);
+
+      let shareUrl = '';
+
+      switch (opt.dataset.platform) {
+        case 'facebook':
+          // Facebook allows message in 'quote' param
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(detailPage)}&quote=${encodedMessage}`;
+          break;
+        case 'twitter':
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodedMessage}`;
+          break;
+        case 'whatsapp':
+          shareUrl = `https://api.whatsapp.com/send?text=${encodedMessage}`;
+          break;
+        case 'linkedin':
+          // LinkedIn doesn't support custom text in URL params
+          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(detailPage)}`;
+          break;
+        default:
+          navigator.clipboard.writeText(message)
+            .then(() => alert('✅ Share message copied to clipboard'))
+            .catch(() => console.warn('Clipboard unavailable'));
+          return;
+      }
+
+      window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=500');
+      opt.closest('.share-popup')?.classList.add('hidden');
+    });
+  });
+
+  // === News card click to open detail page ===
+  document.querySelectorAll('.news-card').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('.share-btn') || e.target.closest('.share-popup')) return; // Prevent conflict
+
+      const title = card.dataset.title || 'Untitled';
+      const date = card.dataset.date || '';
+      const image = card.dataset.image || '';
+      const description = card.dataset.description || '';
+
+      const content = `
+        <p>${description}</p>
+        <p class="mt-4">Stay tuned for more in-depth analysis and updates on this topic.</p>
+      `;
+
+      localStorage.setItem('selectedNews', JSON.stringify({ title, date, image, description, content }));
+      window.location.href = 'blog_detail.html';
+    });
+  });
+})();
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const news = JSON.parse(localStorage.getItem('selectedNews'));
+  if (!news) return;
+
+  document.querySelector('#news-title').innerText = news.title;
+  document.querySelector('#news-date').innerText = news.date;
+  document.querySelector('#news-image').src = news.image;
+  document.querySelector('#news-content').innerHTML = news.content;
+});
+
+ document.addEventListener("DOMContentLoaded", function () {
+      const selectedNews = JSON.parse(localStorage.getItem("selectedNews"));
+      if (selectedNews) {
+        document.getElementById("news-title").textContent = selectedNews.title;
+        document.getElementById("news-category").innerHTML =
+          'Category: <span class="font-medium text-blue-600">' + selectedNews.category + "</span>";
+        document.getElementById("news-date").textContent = "Published: " + selectedNews.date;
+        document.getElementById("news-description").textContent = selectedNews.description;
+        document.getElementById("news-image").src = selectedNews.image;
+      }
+    });
