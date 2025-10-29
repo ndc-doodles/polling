@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const detailPage = `${window.location.origin}/polling/blog_detail.html`;
 
       // Message structure for sharing
-      const message = `📰 ${title}\n\n${description}...\n\nRead more: ${detailPage}`;
+      const message = `${title}\n\n${description}...\n\nRead more: ${detailPage}`;
       const encodedMessage = encodeURIComponent(message);
 
       let shareUrl = '';
