@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = card.dataset.title || '';
       const description = card.dataset.description || '';
 
-      // ✅ Build correct base URL (works for GitHub Pages or localhost)
+      // ✅ Build correct base URL (works on GitHub Pages or localhost)
       const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname.replace(/\/[^/]*$/, '/')}`;
 
       let image = card.dataset.image || '';
@@ -204,17 +204,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const readMoreUrl = new URL('blog_detail.html', baseUrl).href;
       const shortDesc = description.length > 200 ? description.substring(0, 200) + "..." : description;
 
-      // ✅ Proper text order
+      // ✅ Reorder: text first, image last (fixes WhatsApp truncation)
       const formattedText =
 `📰 *${title.toUpperCase()}*
 
 ${shortDesc}
 
-📸 ${image}
+👉 Read more: ${readMoreUrl}
 
-👉 Read more: ${readMoreUrl}`;
+📸 ${image}`;
 
-      // --- Try Web Share API (for mobile native share) ---
+      // --- Try Web Share API first ---
       if (navigator.share) {
         try {
           const shareData = {
@@ -225,7 +225,7 @@ ${shortDesc}
           if (navigator.canShare && image) {
             const response = await fetch(image);
             const blob = await response.blob();
-            const file = new File([blob], "news.jpg", { type: blob.type });
+            const file = new File([blob], "news-image.jpg", { type: blob.type });
             if (navigator.canShare({ files: [file] })) {
               shareData.files = [file];
             }
@@ -238,8 +238,9 @@ ${shortDesc}
         }
       }
 
-      // --- Fallback for WhatsApp / Facebook / Twitter ---
-      const encodedText = encodeURIComponent(formattedText);
+      // --- Fallback share URLs ---
+      const encodedText = encodeURIComponent(formattedText)
+        .replace(/%0A/g, '\n'); // keep line breaks readable
       const encodedUrl = encodeURIComponent(readMoreUrl);
       const encodedTitle = encodeURIComponent(title);
       const encodedDesc = encodeURIComponent(shortDesc);
@@ -254,7 +255,8 @@ ${shortDesc}
           shareUrl = `https://twitter.com/intent/tweet?text=${encodedText}`;
           break;
         case 'whatsapp':
-          shareUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
+          // WhatsApp prefers full message (not encoded URLs mid-text)
+          shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(formattedText)}`;
           break;
         case 'linkedin':
           shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedDesc}`;
