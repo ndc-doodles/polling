@@ -281,3 +281,58 @@ document.addEventListener("DOMContentLoaded", function () {
   const imgEl = document.getElementById("news-image");
   if (imgEl) imgEl.src = selectedNews.image || "";
 });
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Load selected news from localStorage
+  const selectedNews = JSON.parse(localStorage.getItem("selectedNews"));
+  if (!selectedNews) return;
+
+  // Populate detail page
+  document.getElementById("news-title").textContent = selectedNews.title || "Untitled";
+  document.getElementById("news-date").textContent = "Published: " + (selectedNews.date || "");
+  document.getElementById("news-description").textContent = selectedNews.description || "";
+  document.getElementById("news-image").src = selectedNews.image || "./static/images/default-news.jpg";
+
+  // Set category if present
+  const cat = document.getElementById("news-category");
+  if (cat)
+    cat.innerHTML = 'Category: <span class="font-medium text-blue-600">' +
+      (selectedNews.category || "General") + "</span>";
+
+  // === SHARE BUTTONS LOGIC ===
+  const detailUrl = window.location.href;
+  const title = selectedNews.title || "News Update";
+  const description = (selectedNews.description || "").slice(0, 120);
+  const message = `**${title}**\n\n${description}...\n\nRead more: ${detailUrl}`;
+  const encodedMessage = encodeURIComponent(message);
+
+  document.querySelectorAll("button[data-platform]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      let shareUrl = "";
+
+      switch (btn.dataset.platform) {
+        case "facebook":
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(detailUrl)}&quote=${encodedMessage}`;
+          break;
+        case "twitter":
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodedMessage}`;
+          break;
+        case "whatsapp":
+          shareUrl = `https://api.whatsapp.com/send?text=${encodedMessage}`;
+          break;
+        case "linkedin":
+          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(detailUrl)}`;
+          break;
+      }
+
+      if (shareUrl) {
+        window.open(shareUrl, "_blank", "noopener,noreferrer,width=600,height=500");
+      }
+    });
+  });
+});
