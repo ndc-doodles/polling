@@ -173,9 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       const popup = btn.nextElementSibling;
+
+      // Close other popups
       document.querySelectorAll('.share-popup').forEach(p => {
         if (p !== popup) p.classList.add('hidden');
       });
+
       popup.classList.toggle('hidden');
     });
   });
@@ -189,56 +192,57 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.share-popup button[data-platform]').forEach(opt => {
     opt.addEventListener('click', async e => {
       e.stopPropagation();
-
       const card = opt.closest('.news-card');
       const title = card.dataset.title || '';
       const description = card.dataset.description || '';
-      const baseUrl = `${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, '/')}`;
-      const readMoreUrl = `${baseUrl}blog_detail.html`;
-
-      let image = card.dataset.image || '';
-      if (image && !image.startsWith('http')) {
-        image = new URL(image, baseUrl).href;
-      }
+      const image = card.dataset.image || '';
+      const readMoreUrl = `${window.location.origin}/blog_detail.html`; // ✅ your detail page link
 
       const shortDesc = description.length > 180 ? description.substring(0, 180) + "..." : description;
 
-      // === 🧾 Formatted message (image moved to bottom)
-      const formattedText = 
-        `📰 *${title.toUpperCase()}*\n\n${shortDesc}\n\n👉 Read more: ${readMoreUrl}\n\n📸 ${image}`;
+      // --- Construct formatted share message ---
+      const formattedText = `**${title}**\n\n${shortDesc}\n\n👉 Read more: ${readMoreUrl}`;
 
-      // === Try native Web Share API (mobile browsers)
+      // --- Try using Web Share API first ---
       if (navigator.share) {
         try {
-          const shareData = {
-            title,
-            text: `${title}\n\n${shortDesc}\n\nRead more: ${readMoreUrl}`,
-            url: readMoreUrl,
-          };
+          const shareData = { title, text: `${title}\n\n${shortDesc}\n\nRead more: ${readMoreUrl}`, url: readMoreUrl };
+
+          if (navigator.canShare && image) {
+            const response = await fetch(image);
+            const blob = await response.blob();
+            const file = new File([blob], "news-image.jpg", { type: blob.type });
+            if (navigator.canShare({ files: [file] })) {
+              shareData.files = [file];
+            }
+          }
+
           await navigator.share(shareData);
           return;
         } catch (err) {
-          console.warn('Native share failed, fallback used:', err);
+          console.warn('Native share failed, using fallback:', err);
         }
       }
 
-      // === Encode the text properly (for WhatsApp, Twitter, etc.)
-      const encodedText = encodeURIComponent(formattedText)
-        .replace(/%0A/g, '%0D%0A'); // fix newlines
+      // --- Fallback URLs ---
+      const encodedTitle = encodeURIComponent(title);
+      const encodedDesc = encodeURIComponent(shortDesc);
+      const encodedFormatted = encodeURIComponent(formattedText);
+      const encodedUrl = encodeURIComponent(readMoreUrl);
 
       let shareUrl = '';
       switch (opt.dataset.platform) {
         case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(readMoreUrl)}&quote=${encodedText}`;
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedTitle}%0A${encodedDesc}`;
           break;
         case 'twitter':
-          shareUrl = `https://twitter.com/intent/tweet?text=${encodedText}`;
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodedFormatted}`;
           break;
         case 'whatsapp':
-          shareUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
+          shareUrl = `https://api.whatsapp.com/send?text=${encodedFormatted}`;
           break;
         case 'linkedin':
-          shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(readMoreUrl)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(shortDesc)}`;
+          shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedDesc}`;
           break;
       }
 
@@ -254,19 +258,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const title = card.dataset.title;
       const date = card.dataset.date;
-      const description = card.dataset.description;
-      const category = card.dataset.category || "General";
 
+      // ✅ Fix: Ensure image path is absolute
       let image = card.dataset.image || '';
       if (image && !image.startsWith('http')) {
         image = new URL(image, window.location.origin).href;
       }
 
-      const content = `<p>${description}</p><p class="mt-4">Stay tuned for more updates on this issue.</p>`;
+      const description = card.dataset.description;
+      const category = card.dataset.category || "General";
+
+      const content = `
+        <p>${description}</p>
+        <p class="mt-4">Stay tuned for more updates on this issue.</p>
+      `;
+
       localStorage.setItem('selectedNews', JSON.stringify({ title, date, image, description, category, content }));
       window.location.href = 'blog_detail.html';
     });
   });
+
 })();
 
 
