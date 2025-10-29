@@ -448,64 +448,7 @@
 
 
 
-<script>
-const slides = [
-  document.getElementById('slide1'),
-  document.getElementById('slide2'),
-  document.getElementById('slide3')
-];
-const progressBars = [
-  document.getElementById('progress1'),
-  document.getElementById('progress2'),
-  document.getElementById('progress3')
-];
-const progressContainers = document.querySelectorAll('[data-index]');
 
-let current = 0;
-let autoSlideTimer;
-let progressTimer;
-
-function resetProgressBars() {
-  progressBars.forEach(bar => bar.style.width = '0%');
-}
-
-function showSlide(index) {
-  clearInterval(progressTimer);
-  clearTimeout(autoSlideTimer);
-
-  // Show the chosen slide
-  slides.forEach((slide, i) => {
-    slide.style.opacity = i === index ? '1' : '0';
-  });
-
-  resetProgressBars();
-
-  let width = 0;
-  progressTimer = setInterval(() => {
-    width += 1;
-    progressBars[index].style.width = width + '%';
-    if (width >= 100) {
-      clearInterval(progressTimer);
-    }
-  }, 50); // 5 seconds
-
-  autoSlideTimer = setTimeout(() => {
-    current = (index + 1) % slides.length;
-    showSlide(current);
-  }, 5000);
-}
-
-// Allow click to jump directly
-progressContainers.forEach(bar => {
-  bar.addEventListener('click', () => {
-    current = parseInt(bar.dataset.index);
-    showSlide(current);
-  });
-});
-
-// Start auto slider
-showSlide(current);
-</script>
 
 
     <!-- Top Stories -->
@@ -968,10 +911,15 @@ showSlide(current);
       </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="relative bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition cursor-pointer">
-      <!-- Share Button -->
-     <div class="absolute top-2 right-2 z-9999">
+<!-- CARD -->
+<div class="relative bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition cursor-pointer news-card"
+  data-title="Environmental protests as oil & gas exploratory wells authorised in Ramanathapuram"
+  data-date="Nov 15, 2024"
+  data-image="./static/images/n11.jpg"
+  data-description="Environmental protests erupted across Ramanathapuram as authorities approved exploratory oil and gas wells in ecologically sensitive zones. Residents and activists fear irreversible damage to local ecosystems and livelihoods, calling for immediate revocation of drilling permissions.">
+
+  <!-- Share Button -->
+   <div class="absolute top-2 right-2 z-9999">
   <!-- Share Button -->
   <button class="share-btn bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg">
     ⋮
@@ -1019,16 +967,19 @@ showSlide(current);
 </div>
 
 
-
-      <!-- Card Content -->
-      <div class="flex gap-4">
-        <img src="./static/images/n11.jpg" alt="" class="w-20 h-20 rounded object-cover">
-        <div>
-          <p class="text-sm text-gray-500">Nov 15, 2024</p>
-          <h4 class="text-base font-semibold">Environmental protests as oil & gas exploratory wells authorised in Ramanathapuram</h4>
-        </div>
-      </div>
+  <!-- Card Content -->
+  <div class="flex gap-4">
+    <img src="./static/images/n11.jpg" alt="" class="w-20 h-20 rounded object-cover">
+    <div>
+      <p class="text-sm text-gray-500">Nov 15, 2024</p>
+      <h4 class="text-base font-semibold">Environmental protests as oil & gas exploratory wells authorised in Ramanathapuram</h4>
+      <p class="text-gray-500 text-sm mt-1 line-clamp-2">
+        Environmental protests erupted across Ramanathapuram as authorities approved exploratory oil and gas wells in ecologically sensitive zones...
+      </p>
     </div>
+  </div>
+</div>
+
   </div>
 </div>
 
@@ -1036,129 +987,6 @@ showSlide(current);
   </div>
 
 
-<script>
-(function () {
-  // === Toggle popup visibility ===
-  document.querySelectorAll('.share-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      const popup = btn.nextElementSibling;
-
-      // Close other open popups
-      document.querySelectorAll('.share-popup').forEach(p => {
-        if (p !== popup) p.classList.add('hidden');
-      });
-
-      // Toggle current popup
-      popup.classList.toggle('hidden');
-    });
-  });
-
-  // === Close all popups when clicking outside ===
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.share-popup').forEach(p => p.classList.add('hidden'));
-  });
-
-  // === Handle platform-specific sharing ===
-  document.querySelectorAll('.share-popup button[data-platform]').forEach(opt => {
-    opt.addEventListener('click', e => {
-      e.stopPropagation();
-
-      // Find the nearest parent container (supports various card layouts)
-      const container =
-        opt.closest('[id^="slide"]') ||
-        opt.closest('.cursor-pointer') ||
-        opt.closest('.relative') ||
-        opt.closest('div');
-
-      // ✅ Extract the nearest title outside popup
-      let title = 'Latest News';
-      if (container) {
-        const titleEl = Array.from(
-          container.querySelectorAll('h1, h2, h3, h4, .news-title')
-        ).find(el => !el.closest('.share-popup')); // ignore headings inside popup
-        if (titleEl) title = titleEl.innerText.trim();
-      }
-
-      // === Build full shareable link (Dynamic + GitHub Pages compatible) ===
-      const currentPath = window.location.pathname.replace(/\/[^/]*$/, '');
-      const baseUrl = `${window.location.origin}${currentPath}`;
-      const shareLink = `${baseUrl}/blog_detail.html?title=${encodeURIComponent(title)}`;
-      const encodedLink = encodeURIComponent(shareLink);
-      const encodedTitle = encodeURIComponent(title);
-
-      const platform = opt.dataset.platform;
-      let shareUrl = '';
-
-      // === Platform-specific share URLs ===
-      switch (platform) {
-        case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedLink}`;
-          break;
-        case 'twitter':
-        case 'x':
-          shareUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedLink}`;
-          break;
-        case 'whatsapp':
-          // ✅ Mobile and Desktop friendly WhatsApp format
-          shareUrl = `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedLink}`;
-          break;
-        case 'linkedin':
-          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedLink}`;
-          break;
-        default:
-          // Fallback — copy link to clipboard
-          navigator.clipboard.writeText(`${title} - ${shareLink}`)
-            .then(() => alert('✅ Link copied to clipboard'))
-            .catch(() => console.warn('Clipboard unavailable'));
-          return;
-      }
-
-      // === Open share window ===
-      window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=500');
-
-      // === Close popup after sharing ===
-      opt.closest('.share-popup')?.classList.add('hidden');
-    });
-  });
-})();
-</script>
-
-
-
-
-
-
-<script>
-// Attach click handler to all clickable news elements
-document.querySelectorAll(".cursor-pointer").forEach((item) => {
-  item.addEventListener("click", () => {
-    // Extract data safely from the clicked element
-    const title = item.querySelector("h2, h3, h4")?.innerText || "Untitled";
-    const date =
-      item.querySelector("p.text-gray-400, p.text-gray-500, p.text-gray-300")?.innerText ||
-      "Date unavailable";
-    const image = item.querySelector("img")?.src || "featured1.jpg";
-    const description =
-      item.querySelector("p.text-gray-500, p.text-gray-300")?.innerText ||
-      "No short description available.";
-    const content = `
-      <p class="mb-4">${description}</p>
-      <p>This is the detailed view for <strong>${title}</strong>. 
-      Stay tuned for more in-depth political coverage, analysis and updates.</p>
-    `;
-
-    // Store in localStorage
-    localStorage.setItem(
-      "selectedNews",
-      JSON.stringify({ title, date, image, description, content })
-    );
-
-    // Redirect to the detail page
-    window.location.href = "blog_detail.html";
-  });
-});
-</script>
 
 
 
