@@ -173,12 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       const popup = btn.nextElementSibling;
-
-      // Close other popups
       document.querySelectorAll('.share-popup').forEach(p => {
         if (p !== popup) p.classList.add('hidden');
       });
-
       popup.classList.toggle('hidden');
     });
   });
@@ -196,12 +193,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = opt.closest('.news-card');
       const title = card.dataset.title || '';
       const description = card.dataset.description || '';
-
-      // ✅ Auto-detect hosting environment (localhost / GitHub Pages)
       const baseUrl = `${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, '/')}`;
       const readMoreUrl = `${baseUrl}blog_detail.html`;
 
-      // ✅ Fix image URL
       let image = card.dataset.image || '';
       if (image && !image.startsWith('http')) {
         image = new URL(image, baseUrl).href;
@@ -209,11 +203,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const shortDesc = description.length > 180 ? description.substring(0, 180) + "..." : description;
 
-      // ✅ Formatted message
-      const formattedText =
-        `📸 ${image}\n\n📰 ${title.toUpperCase()}\n\n${shortDesc}\n\n👉 Read more: ${readMoreUrl}`;
+      // === 🧾 Formatted message (image moved to bottom)
+      const formattedText = 
+        `📰 *${title.toUpperCase()}*\n\n${shortDesc}\n\n👉 Read more: ${readMoreUrl}\n\n📸 ${image}`;
 
-      // === Try native Web Share API first ===
+      // === Try native Web Share API (mobile browsers)
       if (navigator.share) {
         try {
           const shareData = {
@@ -228,9 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // === Encode the text properly for all platforms ===
+      // === Encode the text properly (for WhatsApp, Twitter, etc.)
       const encodedText = encodeURIComponent(formattedText)
-        .replace(/%0A/g, '%0D%0A'); // ensure line breaks are respected
+        .replace(/%0A/g, '%0D%0A'); // fix newlines
 
       let shareUrl = '';
       switch (opt.dataset.platform) {
@@ -269,7 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const content = `<p>${description}</p><p class="mt-4">Stay tuned for more updates on this issue.</p>`;
-
       localStorage.setItem('selectedNews', JSON.stringify({ title, date, image, description, category, content }));
       window.location.href = 'blog_detail.html';
     });
