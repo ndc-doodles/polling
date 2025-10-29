@@ -173,9 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       const popup = btn.nextElementSibling;
+
+      // Close other popups
       document.querySelectorAll('.share-popup').forEach(p => {
         if (p !== popup) p.classList.add('hidden');
       });
+
       popup.classList.toggle('hidden');
     });
   });
@@ -189,30 +192,27 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.share-popup button[data-platform]').forEach(opt => {
     opt.addEventListener('click', async e => {
       e.stopPropagation();
+
       const card = opt.closest('.news-card');
       const title = card.dataset.title || '';
       const description = card.dataset.description || '';
 
-      // ✅ Build correct base URL (works on GitHub Pages or localhost)
-      const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname.replace(/\/[^/]*$/, '/')}`;
+      // ✅ Handle both GitHub Pages and localhost URLs
+      const baseUrl = `${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, '/')}`;
+      const readMoreUrl = `${baseUrl}blog_detail.html`;
 
+      // ✅ Fix image path properly
       let image = card.dataset.image || '';
       if (image && !image.startsWith('http')) {
         image = new URL(image, baseUrl).href;
       }
 
-      const readMoreUrl = new URL('blog_detail.html', baseUrl).href;
-      const shortDesc = description.length > 200 ? description.substring(0, 200) + "..." : description;
+      // ✅ Shorten long descriptions
+      const shortDesc = description.length > 180 ? description.substring(0, 180) + "..." : description;
 
-      // ✅ Reorder: text first, image last (fixes WhatsApp truncation)
+      // ✅ Proper formatted share text (image first, then heading, then description, then link)
       const formattedText =
-`📰 *${title.toUpperCase()}*
-
-${shortDesc}
-
-👉 Read more: ${readMoreUrl}
-
-📸 ${image}`;
+        `📸 ${image}\n\n📰 *${title}*\n\n${shortDesc}\n\n👉 Read more: ${readMoreUrl}`;
 
       // --- Try Web Share API first ---
       if (navigator.share) {
@@ -220,46 +220,34 @@ ${shortDesc}
           const shareData = {
             title,
             text: `${title}\n\n${shortDesc}\n\nRead more: ${readMoreUrl}`,
+            url: readMoreUrl,
           };
-
-          if (navigator.canShare && image) {
-            const response = await fetch(image);
-            const blob = await response.blob();
-            const file = new File([blob], "news-image.jpg", { type: blob.type });
-            if (navigator.canShare({ files: [file] })) {
-              shareData.files = [file];
-            }
-          }
-
           await navigator.share(shareData);
           return;
         } catch (err) {
-          console.warn("Native share failed:", err);
+          console.warn('Native share failed, fallback used:', err);
         }
       }
 
       // --- Fallback share URLs ---
-      const encodedText = encodeURIComponent(formattedText)
-        .replace(/%0A/g, '\n'); // keep line breaks readable
-      const encodedUrl = encodeURIComponent(readMoreUrl);
+      const encodedFormatted = encodeURIComponent(formattedText);
+      const encodedReadMore = encodeURIComponent(readMoreUrl);
       const encodedTitle = encodeURIComponent(title);
       const encodedDesc = encodeURIComponent(shortDesc);
 
       let shareUrl = '';
-
       switch (opt.dataset.platform) {
         case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedTitle}%0A${encodedDesc}`;
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedReadMore}&quote=${encodedTitle}%0A${encodedDesc}`;
           break;
         case 'twitter':
-          shareUrl = `https://twitter.com/intent/tweet?text=${encodedText}`;
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodedFormatted}`;
           break;
         case 'whatsapp':
-          // WhatsApp prefers full message (not encoded URLs mid-text)
-          shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(formattedText)}`;
+          shareUrl = `https://api.whatsapp.com/send?text=${encodedFormatted}`;
           break;
         case 'linkedin':
-          shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedDesc}`;
+          shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedReadMore}&title=${encodedTitle}&summary=${encodedDesc}`;
           break;
       }
 
@@ -275,18 +263,15 @@ ${shortDesc}
 
       const title = card.dataset.title;
       const date = card.dataset.date;
-      const category = card.dataset.category || "General";
       const description = card.dataset.description;
+      const category = card.dataset.category || "General";
 
       let image = card.dataset.image || '';
       if (image && !image.startsWith('http')) {
         image = new URL(image, window.location.origin).href;
       }
 
-      const content = `
-        <p>${description}</p>
-        <p class="mt-4">Stay tuned for more updates on this issue.</p>
-      `;
+      const content = `<p>${description}</p><p class="mt-4">Stay tuned for more updates on this issue.</p>`;
 
       localStorage.setItem('selectedNews', JSON.stringify({ title, date, image, description, category, content }));
       window.location.href = 'blog_detail.html';
