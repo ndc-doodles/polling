@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.share-popup').forEach(p => p.classList.add('hidden'));
   });
 
-  // === Platform-specific sharing (with heading, paragraph, and read more link) ===
+  // === Platform-specific sharing (with bold heading, paragraph, and read more link) ===
   document.querySelectorAll('.share-popup button[data-platform]').forEach(opt => {
     opt.addEventListener('click', e => {
       e.stopPropagation();
@@ -197,15 +197,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const description = container?.dataset.description?.slice(0, 120) || '';
       const detailPage = `${window.location.origin}/polling/blog_detail.html`;
 
-      // Message structure for sharing
-      const message = `${title}\n\n${description}...\n\nRead more: ${detailPage}`;
+      // Message structure for sharing — bold title + description + link
+      const message = `**${title}**\n\n${description}...\n\nRead more: ${detailPage}`;
       const encodedMessage = encodeURIComponent(message);
 
       let shareUrl = '';
 
       switch (opt.dataset.platform) {
         case 'facebook':
-          // Facebook allows message in 'quote' param
           shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(detailPage)}&quote=${encodedMessage}`;
           break;
         case 'twitter':
@@ -215,7 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
           shareUrl = `https://api.whatsapp.com/send?text=${encodedMessage}`;
           break;
         case 'linkedin':
-          // LinkedIn doesn't support custom text in URL params
           shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(detailPage)}`;
           break;
         default:
@@ -233,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // === News card click to open detail page ===
   document.querySelectorAll('.news-card').forEach(card => {
     card.addEventListener('click', e => {
-      if (e.target.closest('.share-btn') || e.target.closest('.share-popup')) return; // Prevent conflict
+      if (e.target.closest('.share-btn') || e.target.closest('.share-popup')) return;
 
       const title = card.dataset.title || 'Untitled';
       const date = card.dataset.date || '';
@@ -250,6 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 })();
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
