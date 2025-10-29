@@ -227,10 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
       opt.closest('.share-popup')?.classList.add('hidden');
     });
   });
-
-  // === News card click to open detail page ===
- // === News card click to open detail page ===
-document.querySelectorAll('.news-card').forEach(card => {
+// === News card click to open detail page ===
+document.querySelectorAll('.news-card, article[data-title]').forEach(card => {
   card.addEventListener('click', e => {
     if (e.target.closest('.share-btn') || e.target.closest('.share-popup')) return; // Prevent conflict
 
@@ -240,10 +238,8 @@ document.querySelectorAll('.news-card').forEach(card => {
     const description = card.dataset.description || '';
 
     const content = `
-      <h2 class="text-3xl font-extrabold mb-4" style="font-weight: 800;">${title}</h2>
-      <p class="text-gray-600 mb-2">${date}</p>
-      <p class="text-gray-800 leading-relaxed">${description}</p>
-      <p class="mt-4 text-gray-700">Stay tuned for more in-depth analysis and updates on this topic.</p>
+      <p>${description}</p>
+      <p class="mt-4">Stay tuned for more in-depth analysis and updates on this topic.</p>
     `;
 
     localStorage.setItem('selectedNews', JSON.stringify({ title, date, image, description, content }));
@@ -253,26 +249,35 @@ document.querySelectorAll('.news-card').forEach(card => {
 
 })();
 
+document.addEventListener("DOMContentLoaded", function () {
+  const selectedNews = JSON.parse(localStorage.getItem("selectedNews"));
+  if (!selectedNews) return;
 
+  // Title
+  const titleEl = document.getElementById("news-title");
+  if (titleEl) titleEl.textContent = selectedNews.title;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const news = JSON.parse(localStorage.getItem('selectedNews'));
-  if (!news) return;
+  // Category
+  const categoryEl = document.getElementById("news-category");
+  if (categoryEl)
+    categoryEl.innerHTML =
+      'Category: <span class="font-medium text-blue-600">' +
+      (selectedNews.category || "General") +
+      "</span>";
 
-  document.querySelector('#news-title').innerText = news.title;
-  document.querySelector('#news-date').innerText = news.date;
-  document.querySelector('#news-image').src = news.image;
-  document.querySelector('#news-content').innerHTML = news.content;
+  // Date
+  const dateEl = document.getElementById("news-date");
+  if (dateEl) dateEl.textContent = "Published: " + (selectedNews.date || "");
+
+  // Description (short paragraph)
+  const descEl = document.getElementById("news-description");
+  if (descEl) descEl.textContent = selectedNews.description || "";
+
+  // Full content (optional if available)
+  const contentEl = document.getElementById("news-content");
+  if (contentEl) contentEl.innerHTML = selectedNews.content || "";
+
+  // Image
+  const imgEl = document.getElementById("news-image");
+  if (imgEl) imgEl.src = selectedNews.image || "";
 });
-
- document.addEventListener("DOMContentLoaded", function () {
-      const selectedNews = JSON.parse(localStorage.getItem("selectedNews"));
-      if (selectedNews) {
-        document.getElementById("news-title").textContent = selectedNews.title;
-        document.getElementById("news-category").innerHTML =
-          'Category: <span class="font-medium text-blue-600">' + selectedNews.category + "</span>";
-        document.getElementById("news-date").textContent = "Published: " + selectedNews.date;
-        document.getElementById("news-description").textContent = selectedNews.description;
-        document.getElementById("news-image").src = selectedNews.image;
-      }
-    });
