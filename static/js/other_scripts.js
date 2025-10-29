@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       const popup = btn.nextElementSibling;
 
-      // Close other popups
+      // Close other open popups
       document.querySelectorAll('.share-popup').forEach(p => {
         if (p !== popup) p.classList.add('hidden');
       });
@@ -195,21 +195,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = opt.closest('.news-card');
       const title = card.dataset.title || '';
       const description = card.dataset.description || '';
-      let image = card.dataset.image || '';
-      const readMoreUrl = `${window.location.origin}/blog_detail.html`; // ✅ your detail page
 
-      // ✅ Fix relative image paths
+      // ✅ Auto-detect base URL (works on GitHub Pages too)
+      const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname.replace(/\/[^/]*$/, '/')}`;
+
+      // ✅ Build absolute image URL
+      let image = card.dataset.image || '';
       if (image && !image.startsWith('http')) {
-        image = new URL(image, window.location.origin).href;
+        image = new URL(image, baseUrl).href;
       }
 
+      // ✅ Build dynamic "Read More" link
+      const readMoreUrl = new URL('blog_detail.html', baseUrl).href;
+
+      // ✅ Shorten description for share message
       const shortDesc = description.length > 180 ? description.substring(0, 180) + "..." : description;
 
-      // --- Construct formatted message ---
+      // ✅ Construct share message (formatted)
       const formattedText =
-        `📰 *${title}*\n\n${shortDesc}\n\n📸 Image: ${image}\n\n👉 Read more: ${readMoreUrl}`;
+        `📰 *${title.toUpperCase()}*\n\n${shortDesc}\n\n📸 Image: ${image}\n\n👉 Read more: ${readMoreUrl}`;
 
-      // --- Try Web Share API first ---
+      // --- Try Web Share API first (for mobile/browser native share) ---
       if (navigator.share) {
         try {
           const shareData = {
@@ -218,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
             url: readMoreUrl,
           };
 
-          // ✅ If browser supports file sharing, attach image
+          // ✅ If supported, attach the image file
           if (navigator.canShare && image) {
             const response = await fetch(image);
             const blob = await response.blob();
@@ -235,13 +241,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // --- Fallback share URLs ---
+      // --- Fallback share links for different platforms ---
+      const encodedFormatted = encodeURIComponent(formattedText);
       const encodedTitle = encodeURIComponent(title);
       const encodedDesc = encodeURIComponent(shortDesc);
       const encodedImage = encodeURIComponent(image);
       const encodedReadMore = encodeURIComponent(readMoreUrl);
-
-      const encodedFormatted = encodeURIComponent(formattedText);
 
       let shareUrl = '';
       switch (opt.dataset.platform) {
@@ -271,15 +276,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const title = card.dataset.title;
       const date = card.dataset.date;
-
-      // ✅ Fix image URL
       let image = card.dataset.image || '';
+      const category = card.dataset.category || "General";
+      const description = card.dataset.description;
+
+      // ✅ Fix relative image URLs
       if (image && !image.startsWith('http')) {
         image = new URL(image, window.location.origin).href;
       }
-
-      const description = card.dataset.description;
-      const category = card.dataset.category || "General";
 
       const content = `
         <p>${description}</p>
@@ -290,7 +294,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = 'blog_detail.html';
     });
   });
-
 })();
 
 
