@@ -156,7 +156,8 @@ document.querySelectorAll('.news-card').forEach(card => {
     `;
 
     localStorage.setItem('selectedNews', JSON.stringify({ title, date, image, description, category, content }));
-    window.location.href = 'blog_detail.html';
+    window.location.href = `blog_detail.html?title=${encodeURIComponent(title)}`;
+
   });
 });
 
