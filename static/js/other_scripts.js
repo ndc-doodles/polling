@@ -222,29 +222,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // --- Fallback links ---
-      const encodedTitle = encodeURIComponent(title);
-      const encodedDesc = encodeURIComponent(shortDesc);
-      const encodedUrl = encodeURIComponent(pageUrl);
+  // --- Fallback links ---
+const encodedTitle = encodeURIComponent("📰 " + title);
+const encodedDesc = encodeURIComponent(shortDesc + "\n\n🔗 Read more: " + pageUrl);
+const encodedUrl = encodeURIComponent(pageUrl);
 
-      let shareUrl = '';
-      switch (opt.dataset.platform) {
-        case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedTitle}%0A${encodedDesc}`;
-          break;
-        case 'twitter':
-          shareUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}%0A${encodedDesc}&url=${encodedUrl}`;
-          break;
-        case 'whatsapp':
-          shareUrl = `https://api.whatsapp.com/send?text=${encodedTitle}%0A${encodedDesc}%0A${encodedUrl}`;
-          break;
-        case 'linkedin':
-          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
-          break;
-      }
+let shareUrl = '';
+switch (opt.dataset.platform) {
+  case 'facebook':
+    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedTitle}%0A%0A${encodedDesc}`;
+    break;
+  case 'twitter':
+    shareUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}%0A%0A${encodedDesc}`;
+    break;
+  case 'whatsapp':
+    shareUrl = `https://api.whatsapp.com/send?text=${encodedTitle}%0A%0A${encodedDesc}`;
+    break;
+  case 'linkedin':
+    // LinkedIn supports only URL and summary text
+    shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedDesc}`;
+    break;
+}
 
-      window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=500');
-      opt.closest('.share-popup')?.classList.add('hidden');
+window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=500');
+opt.closest('.share-popup')?.classList.add('hidden');
+
     });
   });
 
