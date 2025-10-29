@@ -196,26 +196,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = card.dataset.title || '';
       const description = card.dataset.description || '';
 
-      // ✅ Auto-detect base URL (works on GitHub Pages too)
+      // ✅ Auto-detect base URL (works on GitHub Pages)
       const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname.replace(/\/[^/]*$/, '/')}`;
 
-      // ✅ Build absolute image URL
+      // ✅ Fix relative image URL
       let image = card.dataset.image || '';
       if (image && !image.startsWith('http')) {
         image = new URL(image, baseUrl).href;
       }
 
-      // ✅ Build dynamic "Read More" link
+      // ✅ Build dynamic read more link
       const readMoreUrl = new URL('blog_detail.html', baseUrl).href;
 
-      // ✅ Shorten description for share message
-      const shortDesc = description.length > 180 ? description.substring(0, 180) + "..." : description;
+      // ✅ Format description (limit length)
+      const shortDesc = description.length > 250 ? description.substring(0, 250) + "..." : description;
 
-      // ✅ Construct share message (formatted)
+      // ✅ Arrange message in order: image → title → paragraph → read more
       const formattedText =
-        `📰 *${title.toUpperCase()}*\n\n${shortDesc}\n\n📸 Image: ${image}\n\n👉 Read more: ${readMoreUrl}`;
+        `📸 *Image:* ${image}\n\n📰 *${title.toUpperCase()}*\n\n${shortDesc}\n\n👉 *Read more:* ${readMoreUrl}`;
 
-      // --- Try Web Share API first (for mobile/browser native share) ---
+      // --- Try native Web Share API (mobile) ---
       if (navigator.share) {
         try {
           const shareData = {
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
             url: readMoreUrl,
           };
 
-          // ✅ If supported, attach the image file
+          // If browser supports file sharing, attach image
           if (navigator.canShare && image) {
             const response = await fetch(image);
             const blob = await response.blob();
@@ -237,21 +237,21 @@ document.addEventListener('DOMContentLoaded', () => {
           await navigator.share(shareData);
           return;
         } catch (err) {
-          console.warn('Native share failed, fallback used:', err);
+          console.warn("Native share failed, fallback used:", err);
         }
       }
 
-      // --- Fallback share links for different platforms ---
+      // --- Fallback for web (WhatsApp, Twitter, etc.) ---
       const encodedFormatted = encodeURIComponent(formattedText);
+      const encodedReadMore = encodeURIComponent(readMoreUrl);
+      const encodedImage = encodeURIComponent(image);
       const encodedTitle = encodeURIComponent(title);
       const encodedDesc = encodeURIComponent(shortDesc);
-      const encodedImage = encodeURIComponent(image);
-      const encodedReadMore = encodeURIComponent(readMoreUrl);
 
       let shareUrl = '';
       switch (opt.dataset.platform) {
         case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedReadMore}&quote=${encodedTitle}%0A${encodedDesc}%0A${encodedImage}`;
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedReadMore}&quote=${encodedTitle}%0A${encodedDesc}`;
           break;
         case 'twitter':
           shareUrl = `https://twitter.com/intent/tweet?text=${encodedFormatted}`;
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
           shareUrl = `https://api.whatsapp.com/send?text=${encodedFormatted}`;
           break;
         case 'linkedin':
-          shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedReadMore}&title=${encodedTitle}&summary=${encodedDesc}&source=${encodedImage}`;
+          shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedReadMore}&title=${encodedTitle}&summary=${encodedDesc}`;
           break;
       }
 
@@ -276,11 +276,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const title = card.dataset.title;
       const date = card.dataset.date;
-      let image = card.dataset.image || '';
       const category = card.dataset.category || "General";
       const description = card.dataset.description;
 
-      // ✅ Fix relative image URLs
+      let image = card.dataset.image || '';
       if (image && !image.startsWith('http')) {
         image = new URL(image, window.location.origin).href;
       }
