@@ -18,3 +18,26 @@ p{
 
 }
 
+  /* Keep card sizes consistent while filtering */
+#candidatesGrid .group {
+  min-height: 450px; /* same visual height for all cards */
+  max-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Ensure images don’t resize or stretch */
+#candidatesGrid .group img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* When hiding a card, just fade instead of collapsing layout */
+#candidatesGrid .group.hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}

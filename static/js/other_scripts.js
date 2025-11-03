@@ -55,113 +55,113 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  const slides = [
-    document.getElementById('slide1'),
-    document.getElementById('slide2'),
-    document.getElementById('slide3')
-  ];
+    const slides = [
+      document.getElementById('slide1'),
+      document.getElementById('slide2'),
+      document.getElementById('slide3')
+    ];
 
-  const progressBars = [
-    document.getElementById('progress1'),
-    document.getElementById('progress2'),
-    document.getElementById('progress3')
-  ];
+    const progressBars = [
+      document.getElementById('progress1'),
+      document.getElementById('progress2'),
+      document.getElementById('progress3')
+    ];
 
-  const progressContainers = Array.from(document.querySelectorAll('[data-index]'));
+    const progressContainers = Array.from(document.querySelectorAll('[data-index]'));
 
-  // Basic validation - bail early if essential elements missing
-  if (slides.some(s => s === null) || progressBars.some(b => b === null) || progressContainers.length === 0) {
-    console.warn('Slider: missing required DOM elements (slide/progress). Check IDs and data-index attributes.');
-    return;
-  }
-
-  let current = 0;
-  let autoSlideTimer = null;
-  let progressTimer = null;
-
-  function resetProgressBars() {
-    progressBars.forEach(bar => {
-      if (bar) bar.style.width = '0%';
-    });
-  }
-
-  function clearTimers() {
-    if (progressTimer) {
-      clearInterval(progressTimer);
-      progressTimer = null;
+    // Basic validation - bail early if essential elements missing
+    if (slides.some(s => s === null) || progressBars.some(b => b === null) || progressContainers.length === 0) {
+      console.warn('Slider: missing required DOM elements (slide/progress). Check IDs and data-index attributes.');
+      return;
     }
-    if (autoSlideTimer) {
-      clearTimeout(autoSlideTimer);
-      autoSlideTimer = null;
+
+    let current = 0;
+    let autoSlideTimer = null;
+    let progressTimer = null;
+
+    function resetProgressBars() {
+      progressBars.forEach(bar => {
+        if (bar) bar.style.width = '0%';
+      });
     }
-  }
 
-  function showSlide(index) {
-    // clamp index
-    index = ((index % slides.length) + slides.length) % slides.length;
-
-    clearTimers();
-
-    // Show/hide slides (use opacity + pointer-events for accessibility)
-    slides.forEach((slide, i) => {
-      if (!slide) return;
-      if (i === index) {
-        slide.style.opacity = '1';
-        slide.style.pointerEvents = 'auto';
-      } else {
-        slide.style.opacity = '0';
-        slide.style.pointerEvents = 'none';
-      }
-    });
-
-    // Reset progress bars visually
-    resetProgressBars();
-
-    // Progress animation: increment width from 0 to 100 over durationMs
-    const durationMs = 5000;       // total time per slide
-    const tickMs = 50;             // interval tick (50ms -> 100 ticks for 5s)
-    const step = 100 / (durationMs / tickMs);
-
-    let width = 0;
-    progressTimer = setInterval(() => {
-      width += step;
-      const pct = Math.min(100, width);
-      if (progressBars[index]) progressBars[index].style.width = pct + '%';
-
-      if (pct >= 100) {
+    function clearTimers() {
+      if (progressTimer) {
         clearInterval(progressTimer);
         progressTimer = null;
       }
-    }, tickMs);
+      if (autoSlideTimer) {
+        clearTimeout(autoSlideTimer);
+        autoSlideTimer = null;
+      }
+    }
 
-    // Schedule next slide after durationMs
-    autoSlideTimer = setTimeout(() => {
-      current = (index + 1) % slides.length;
-      showSlide(current);
-    }, durationMs);
-  }
+    function showSlide(index) {
+      // clamp index
+      index = ((index % slides.length) + slides.length) % slides.length;
 
-  // Hook up click handlers for progress containers (jump to slide)
-  progressContainers.forEach(container => {
-    container.addEventListener('click', (e) => {
-      const idx = parseInt(container.dataset.index, 10);
-      if (Number.isNaN(idx)) return;
-      current = idx;
-      showSlide(current);
+      clearTimers();
+
+      // Show/hide slides (use opacity + pointer-events for accessibility)
+      slides.forEach((slide, i) => {
+        if (!slide) return;
+        if (i === index) {
+          slide.style.opacity = '1';
+          slide.style.pointerEvents = 'auto';
+        } else {
+          slide.style.opacity = '0';
+          slide.style.pointerEvents = 'none';
+        }
+      });
+
+      // Reset progress bars visually
+      resetProgressBars();
+
+      // Progress animation: increment width from 0 to 100 over durationMs
+      const durationMs = 5000;       // total time per slide
+      const tickMs = 50;             // interval tick (50ms -> 100 ticks for 5s)
+      const step = 100 / (durationMs / tickMs);
+
+      let width = 0;
+      progressTimer = setInterval(() => {
+        width += step;
+        const pct = Math.min(100, width);
+        if (progressBars[index]) progressBars[index].style.width = pct + '%';
+
+        if (pct >= 100) {
+          clearInterval(progressTimer);
+          progressTimer = null;
+        }
+      }, tickMs);
+
+      // Schedule next slide after durationMs
+      autoSlideTimer = setTimeout(() => {
+        current = (index + 1) % slides.length;
+        showSlide(current);
+      }, durationMs);
+    }
+
+    // Hook up click handlers for progress containers (jump to slide)
+    progressContainers.forEach(container => {
+      container.addEventListener('click', (e) => {
+        const idx = parseInt(container.dataset.index, 10);
+        if (Number.isNaN(idx)) return;
+        current = idx;
+        showSlide(current);
+      });
     });
+
+    // Start
+    showSlide(current);
+
+    // Optional: expose controls to window for debugging
+    window._slider = {
+      showSlide,
+      next: () => showSlide(current + 1),
+      prev: () => showSlide(current - 1),
+      stop: clearTimers
+    };
   });
-
-  // Start
-  showSlide(current);
-
-  // Optional: expose controls to window for debugging
-  window._slider = {
-    showSlide,
-    next: () => showSlide(current + 1),
-    prev: () => showSlide(current - 1),
-    stop: clearTimers
-  };
-});
 
 
 
@@ -336,3 +336,40 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+
+
+
+  const buttons = document.querySelectorAll('.section-btn');
+  const sections = document.querySelectorAll('.section-card');
+  const sidebar = document.getElementById('sidebar');
+  const menuBtn = document.getElementById('menu-btn');
+  const overlay = document.getElementById('overlay');
+
+  // Section toggle
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-target');
+      sections.forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(target).classList.remove('hidden');
+
+      // Hide sidebar on mobile after click
+      if (window.innerWidth < 768) {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    });
+  });
+
+  // Menu button toggle
+  menuBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('-translate-x-full');
+    overlay.classList.toggle('hidden');
+  });
+
+  // Clicking overlay closes sidebar
+  overlay.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');
+    overlay.classList.add('hidden');
+  });
+

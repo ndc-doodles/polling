@@ -161,3 +161,227 @@ window.addEventListener('touchend', () => {
 
 
 
+let loggedIn = false;
+let selectedCandidate = null;
+let generatedOtp = null;
+
+
+const districtData = {
+  "Ariyalur": ["Ariyalur", "Jayankondam"],
+  "Chengalpattu": ["Tambaram", "Pallavaram", "Chengalpattu"],
+  "Chennai": ["Saidapet", "T. Nagar", "Egmore", "Royapuram", "Velachery","Kolathur"],
+  "Coimbatore": ["Coimbatore North", "Coimbatore South", "Pollachi"],
+  "Cuddalore": ["Cuddalore", "Panruti", "Kurinjipadi"],
+  "Dharmapuri": ["Dharmapuri", "Harur"],
+  "Dindigul": ["Dindigul", "Oddanchatram"],
+  "Erode": ["Erode East", "Erode West", "Perundurai"],
+  "Kallakurichi": ["Kallakurichi", "Chinnasalem"],
+  "Kanchipuram": ["Kanchipuram", "Sriperumbudur"],
+  "Kanyakumari": ["Nagercoil", "Colachel"],
+  "Karur": ["Karur", "Aravakurichi"],
+  "Krishnagiri": ["Krishnagiri", "Hosur"],
+  "Madurai": ["Madurai Central", "Madurai South", "Melur"],
+  "Mayiladuthurai": ["Mayiladuthurai", "Sirkazhi"],
+  "Nagapattinam": ["Nagapattinam", "Vedaranyam"],
+  "Namakkal": ["Namakkal", "Rasipuram"],
+  "Perambalur": ["Perambalur"],
+  "Pudukkottai": ["Pudukkottai", "Aranthangi"],
+  "Ramanathapuram": ["Ramanathapuram", "Paramakudi"],
+  "Ranipet": ["Ranipet", "Arakkonam"],
+  "Salem": ["Salem North", "Salem South", "Edappadi"],
+  "Sivagangai": ["Sivagangai", "Manamadurai"],
+  "Tenkasi": ["Tenkasi", "Sankarankovil"],
+  "Thanjavur": ["Thanjavur", "Papanasam"],
+  "Theni": ["Theni", "Bodinayakanur"],
+  "Thoothukudi": ["Thoothukudi", "Kovilpatti"],
+  "Tiruchirappalli": ["Trichy West", "Trichy East", "Lalgudi"],
+  "Tirunelveli": ["Tirunelveli", "Palayamkottai"],
+  "Tirupathur": ["Tirupathur", "Vaniyambadi"],
+  "Tiruppur": ["Tiruppur North", "Tiruppur South"],
+  "Tiruvallur": ["Avadi", "Tiruvallur", "Poonamallee"],
+  "Tiruvannamalai": ["Tiruvannamalai", "Cheyyar"],
+  "Tiruvarur": ["Tiruvarur", "Mannargudi"],
+  "Vellore": ["Vellore", "Katpadi"],
+  "Viluppuram": ["Viluppuram", "Tindivanam"],
+  "Virudhunagar": ["Virudhunagar", "Sivakasi"]
+};
+
+// ----------------------
+// 🟦 FILTER LOGIC
+// ----------------------
+const districtFilter = document.getElementById("districtFilter");
+const constituencyFilter = document.getElementById("constituencyFilter");
+const searchInput = document.getElementById("searchInput");
+const candidatesGrid = document.getElementById("candidatesGrid");
+
+// Candidate cards
+const allCandidates = [...document.querySelectorAll("#candidatesGrid .group")];
+
+// ✅ Populate districts dropdown
+function populateDistricts() {
+  districtFilter.innerHTML =
+    `<option value="all">District</option>` +
+    Object.keys(districtData)
+      .map(d => `<option value="${d}">${d}</option>`)
+      .join("");
+}
+populateDistricts();
+
+// ✅ Populate constituencies dynamically
+districtFilter.addEventListener("change", () => {
+  const selected = districtFilter.value;
+  if (selected === "all") {
+    constituencyFilter.innerHTML = `<option value="all">Constituency</option>`;
+  } else {
+    constituencyFilter.innerHTML =
+      `<option value="all">Constituency</option>` +
+      districtData[selected]
+        .map(c => `<option value="${c}">${c}</option>`)
+        .join("");
+  }
+  filterCandidates();
+});
+
+function filterCandidates() {
+  const district = districtFilter.value.toLowerCase();
+  const constituency = constituencyFilter.value.toLowerCase();
+  const search = searchInput.value.toLowerCase();
+
+  // Filter matching candidates
+  const visible = [];
+  const hidden = [];
+
+  allCandidates.forEach(card => {
+    const name = card.dataset.name.toLowerCase();
+    const party = card.dataset.party.toLowerCase();
+    const d = card.dataset.district.toLowerCase();
+    const c = card.dataset.constituency.toLowerCase();
+
+    const matches =
+      (district === "all" || d === district) &&
+      (constituency === "all" || c === constituency) &&
+      (name.includes(search) || party.includes(search));
+
+    if (matches) visible.push(card);
+    else hidden.push(card);
+  });
+
+  // Reorder — visible first
+  candidatesGrid.innerHTML = "";
+  visible.forEach(card => {
+    card.classList.remove("hidden");
+    candidatesGrid.appendChild(card);
+  });
+  hidden.forEach(card => {
+    card.classList.add("hidden");
+    candidatesGrid.appendChild(card);
+  });
+}
+
+// Reset filters on load
+window.addEventListener("load", () => {
+  districtFilter.value = "all";
+  constituencyFilter.innerHTML = `<option value="all">Constituency</option>`;
+  searchInput.value = "";
+  filterCandidates();
+});
+
+// Apply filtering
+[searchInput, constituencyFilter].forEach(el =>
+  el.addEventListener("input", filterCandidates)
+);
+
+// ----------------------
+// 🟩 LOGIN + OTP
+// ----------------------
+document.querySelectorAll(".group button").forEach(btn => {
+  btn.addEventListener("click", e => {
+    const candidate = e.target.closest(".group").dataset.name;
+    selectedCandidate = { name: candidate, button: e.target };
+    if (!loggedIn) openLoginModal();
+    else openConfirmModal(candidate);
+  });
+});
+
+function openLoginModal() {
+  const modal = document.getElementById("loginModal");
+  modal.style.display = "flex";
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeLoginModal();
+  });
+}
+function closeLoginModal() {
+  document.getElementById("loginModal").style.display = "none";
+}
+
+// ✅ Send OTP
+document.getElementById("sendOtpBtn").addEventListener("click", () => {
+  const phone = document.getElementById("phone").value.trim();
+  if (/^[6-9]\d{9}$/.test(phone)) {
+    generatedOtp = Math.floor(100000 + Math.random() * 900000);
+    alert(`Your OTP is ${generatedOtp}`); // Simulated OTP
+    document.getElementById("otpContainer").classList.remove("hidden");
+  } else {
+    alert("Enter a valid 10-digit Indian phone number.");
+  }
+});
+
+// ✅ Verify Login
+document.getElementById("loginSubmit").addEventListener("click", () => {
+  const name = document.getElementById("loginName").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const otp = document.getElementById("otpInput").value.trim();
+  const age = parseInt(document.getElementById("loginAge").value.trim());
+
+  if (!name || !phone || !otp || !age) return alert("Please fill all fields.");
+  if (!/^[6-9]\d{9}$/.test(phone)) return alert("Invalid phone number.");
+  if (otp != generatedOtp) return alert("Incorrect OTP.");
+  if (age < 18) return alert("You must be 18 or older to vote.");
+
+  loggedIn = true;
+  closeLoginModal();
+  openConfirmModal(selectedCandidate.name);
+});
+
+// ----------------------
+// 🟧 CONFIRM VOTE
+// ----------------------
+function openConfirmModal(candidate) {
+  const modal = document.getElementById("voteConfirmModal");
+  modal.style.display = "flex";
+  document.getElementById("confirmText").textContent = `Confirm your vote for ${candidate}?`;
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeConfirmModal();
+  });
+}
+function closeConfirmModal() {
+  document.getElementById("voteConfirmModal").style.display = "none";
+}
+document.getElementById("confirmVoteBtn").addEventListener("click", () => {
+  closeConfirmModal();
+  submitVote(selectedCandidate);
+});
+
+// ----------------------
+// 🟦 SUCCESS MODAL
+// ----------------------
+function submitVote(candidate) {
+  const btn = candidate.button;
+  btn.textContent = "Voted";
+  btn.disabled = true;
+  btn.classList.add("bg-green-700", "cursor-not-allowed");
+  document.querySelectorAll(".group button").forEach(other => {
+    if (other !== btn) {
+      other.disabled = true;
+      other.classList.add("bg-gray-400", "cursor-not-allowed");
+    }
+  });
+  const modal = document.getElementById("successModal");
+  modal.style.display = "flex";
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeSuccessModal();
+  });
+}
+function closeSuccessModal() {
+  document.getElementById("successModal").style.display = "none";
+}
